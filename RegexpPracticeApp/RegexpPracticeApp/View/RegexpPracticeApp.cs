@@ -16,6 +16,7 @@ namespace RegexpPracticeApp {
 
         public RegexpPracticeAPp() {
             InitializeComponent();
+
             ActivePictureBox = this.iconHome;
         }
 
@@ -24,5 +25,14 @@ namespace RegexpPracticeApp {
             ViewRPA.switchingIcon(ActivePictureBox, currentPictureBox);
             ActivePictureBox = currentPictureBox; 
         }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void RegexpPracticeAPp_Load(object sender, EventArgs e) {
+
+        }
+
     }
 }
