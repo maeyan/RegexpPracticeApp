@@ -12,7 +12,7 @@ namespace RegexpPracticeApp {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RegexpPracticeAPp());
+            Application.Run(new RegexpPracticeApp());
         }
     }
 }
