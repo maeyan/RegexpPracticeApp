@@ -74,5 +74,27 @@ namespace RegexpPracticeApp.View{
                 annotation.SelectionFont = new Font(annotation.SelectionFont, FontStyle.Bold);
             }
         }
+
+        public class Problem {
+            static public void ShowProblemPanel(Panel pnl) {
+
+                while (65 < pnl.Left) {
+                    pnl.Left -= 5;
+                    //System.Threading.Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+
+            }
+
+            static public void CloseProblemPanel(Panel pnl) {
+
+                while (pnl.Left<650) {
+                    pnl.Left += 5;
+                    //System.Threading.Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+
+            }
+        }
     }
 }

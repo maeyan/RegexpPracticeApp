@@ -90,6 +90,9 @@ namespace RegexpPracticeApp {
             this.lbSystem.Text = "";
             this.lbReplace.Visible = true;
 
+            //LinkLabel
+            this.lnkSelectProblem.Visible = false;
+
             //Panel
             this.pnlModeSelect.Visible = true;
 
@@ -127,6 +130,9 @@ namespace RegexpPracticeApp {
             this.lbUser.Text = "■正規表現実行結果";
             this.lbSystem.Text = "■下記結果なる正規表現を書いてください";
             this.lbReplace.Visible = false;
+
+            //LinkLabel
+            this.lnkSelectProblem.Visible = true;
 
             //Panel
             this.pnlModeSelect.Visible = false;
@@ -198,6 +204,14 @@ namespace RegexpPracticeApp {
 
         private void ckMultiLine_CheckedChanged(object sender, EventArgs e) {
             regexpForm.RichTextBoxColorReset();
+        }
+
+        private void lnkSelectProblem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem);
+        }
+
+        private void lnkCloseProblemList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            vRegexpPracticeApp.Problem.CloseProblemPanel(this.pnlProblem);
         }
     }
 }
