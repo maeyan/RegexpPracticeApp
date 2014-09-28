@@ -58,8 +58,6 @@ namespace RegexpPracticeApp {
                 default:
                     break;
             }
-
-        
         }
 
 
@@ -212,6 +210,17 @@ namespace RegexpPracticeApp {
 
         private void lnkCloseProblemList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             vRegexpPracticeApp.Problem.CloseProblemPanel(this.pnlProblem);
+        }
+
+        private void lnkEntryProblem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+
+            //編集画面を開く
+            ProblemEditForm form = new ProblemEditForm();
+            form.StartPosition = FormStartPosition.Manual; //任意の位置に表示するため設定を変える
+            form.Location= new Point(this.Location.X + 25, this.Location.Y + 25); //25ずつオフセットした位置に出す
+            form.ShowDialog(this);
+            form.Show();
+            form.Dispose();
         }
     }
 }

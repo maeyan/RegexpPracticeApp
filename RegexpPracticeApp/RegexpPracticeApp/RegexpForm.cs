@@ -15,8 +15,8 @@ namespace RegexpPracticeApp {
         private TextBox _tbReplace = null;
 
 
-        public RegexpForm(RichTextBox rtbInputString, 
-                          TextBox tbRegexp, TextBox tbReplace, 
+        public RegexpForm(RichTextBox rtbInputString,
+                          TextBox tbRegexp, TextBox tbReplace,
                           CheckBox ckIgnoreCase, CheckBox ckMultiLine) {
             _rtbInputString = rtbInputString;
             _tbRegexp = tbRegexp;
@@ -24,6 +24,15 @@ namespace RegexpPracticeApp {
             _ckIgnoreCase = ckIgnoreCase;
             _ckMultiLine = ckMultiLine;
         }
+
+        public RegexpForm(RichTextBox rtbInputString,
+                          TextBox tbRegexp, CheckBox ckIgnoreCase, CheckBox ckMultiLine) {
+            _rtbInputString = rtbInputString;
+            _tbRegexp = tbRegexp;
+            _ckIgnoreCase = ckIgnoreCase;
+            _ckMultiLine = ckMultiLine;
+        }
+
 
         public void RichTextBoxColorReset() {
             if (_rtbInputString.Text == "") { return; }

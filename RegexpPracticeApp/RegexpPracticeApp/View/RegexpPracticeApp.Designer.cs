@@ -24,10 +24,15 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexpPracticeApp));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexpPracticeApp));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.iconHome = new System.Windows.Forms.PictureBox();
+            this.iconProblem = new System.Windows.Forms.PictureBox();
+            this.iconSettings = new System.Windows.Forms.PictureBox();
+            this.iconImport = new System.Windows.Forms.PictureBox();
+            this.iconExport = new System.Windows.Forms.PictureBox();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.rtbProblem = new System.Windows.Forms.RichTextBox();
             this.rtbResult = new System.Windows.Forms.RichTextBox();
@@ -38,6 +43,7 @@
             this.lbUser = new System.Windows.Forms.Label();
             this.lbSystem = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lnkCloseProblemList = new System.Windows.Forms.LinkLabel();
             this.pnlModeSelect = new System.Windows.Forms.Panel();
             this.rbReplace = new System.Windows.Forms.RadioButton();
             this.rbSearch = new System.Windows.Forms.RadioButton();
@@ -48,27 +54,21 @@
             this.ckIgnoreCase = new System.Windows.Forms.CheckBox();
             this.ckMultiLine = new System.Windows.Forms.CheckBox();
             this.pnlProblem = new System.Windows.Forms.Panel();
+            this.lnkEntryProblem = new System.Windows.Forms.LinkLabel();
             this.dgvProblemList = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.level = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lnkEntryProblem = new System.Windows.Forms.LinkLabel();
-            this.lnkCloseProblemList = new System.Windows.Forms.LinkLabel();
-            this.iconHome = new System.Windows.Forms.PictureBox();
-            this.iconProblem = new System.Windows.Forms.PictureBox();
-            this.iconSettings = new System.Windows.Forms.PictureBox();
-            this.iconImport = new System.Windows.Forms.PictureBox();
-            this.iconExport = new System.Windows.Forms.PictureBox();
             this.lnkSelectProblem = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
-            this.pnlModeSelect.SuspendLayout();
-            this.pnlProblem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).BeginInit();
+            this.pnlModeSelect.SuspendLayout();
+            this.pnlProblem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -86,6 +86,76 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(60, 488);
             this.panel1.TabIndex = 0;
+            // 
+            // iconHome
+            // 
+            this.iconHome.Image = ((System.Drawing.Image)(resources.GetObject("iconHome.Image")));
+            this.iconHome.Location = new System.Drawing.Point(12, 12);
+            this.iconHome.Name = "iconHome";
+            this.iconHome.Size = new System.Drawing.Size(37, 37);
+            this.iconHome.TabIndex = 6;
+            this.iconHome.TabStop = false;
+            this.iconHome.Tag = "home";
+            this.toolTip1.SetToolTip(this.iconHome, "問題");
+            this.iconHome.Click += new System.EventHandler(this.iconChange_Click);
+            this.iconHome.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
+            this.iconHome.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
+            // 
+            // iconProblem
+            // 
+            this.iconProblem.Image = ((System.Drawing.Image)(resources.GetObject("iconProblem.Image")));
+            this.iconProblem.Location = new System.Drawing.Point(12, 62);
+            this.iconProblem.Name = "iconProblem";
+            this.iconProblem.Size = new System.Drawing.Size(37, 37);
+            this.iconProblem.TabIndex = 5;
+            this.iconProblem.TabStop = false;
+            this.iconProblem.Tag = "problem";
+            this.toolTip1.SetToolTip(this.iconProblem, "問題の一覧を表示");
+            this.iconProblem.Click += new System.EventHandler(this.iconChange_Click);
+            this.iconProblem.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
+            this.iconProblem.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
+            // 
+            // iconSettings
+            // 
+            this.iconSettings.Image = ((System.Drawing.Image)(resources.GetObject("iconSettings.Image")));
+            this.iconSettings.Location = new System.Drawing.Point(12, 212);
+            this.iconSettings.Name = "iconSettings";
+            this.iconSettings.Size = new System.Drawing.Size(37, 37);
+            this.iconSettings.TabIndex = 4;
+            this.iconSettings.TabStop = false;
+            this.iconSettings.Tag = "settings";
+            this.toolTip1.SetToolTip(this.iconSettings, "設定");
+            this.iconSettings.Click += new System.EventHandler(this.iconChange_Click);
+            this.iconSettings.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
+            this.iconSettings.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
+            // 
+            // iconImport
+            // 
+            this.iconImport.Image = ((System.Drawing.Image)(resources.GetObject("iconImport.Image")));
+            this.iconImport.Location = new System.Drawing.Point(12, 112);
+            this.iconImport.Name = "iconImport";
+            this.iconImport.Size = new System.Drawing.Size(37, 37);
+            this.iconImport.TabIndex = 3;
+            this.iconImport.TabStop = false;
+            this.iconImport.Tag = "import";
+            this.toolTip1.SetToolTip(this.iconImport, "問題をImportする");
+            this.iconImport.Click += new System.EventHandler(this.iconChange_Click);
+            this.iconImport.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
+            this.iconImport.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
+            // 
+            // iconExport
+            // 
+            this.iconExport.Image = ((System.Drawing.Image)(resources.GetObject("iconExport.Image")));
+            this.iconExport.Location = new System.Drawing.Point(12, 162);
+            this.iconExport.Name = "iconExport";
+            this.iconExport.Size = new System.Drawing.Size(37, 37);
+            this.iconExport.TabIndex = 2;
+            this.iconExport.TabStop = false;
+            this.iconExport.Tag = "export";
+            this.toolTip1.SetToolTip(this.iconExport, "問題をExportする");
+            this.iconExport.Click += new System.EventHandler(this.iconChange_Click);
+            this.iconExport.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
+            this.iconExport.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
             // 
             // tbMessage
             // 
@@ -182,6 +252,21 @@
             // toolTip1
             // 
             this.toolTip1.AutomaticDelay = 100;
+            // 
+            // lnkCloseProblemList
+            // 
+            this.lnkCloseProblemList.AutoSize = true;
+            this.lnkCloseProblemList.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lnkCloseProblemList.LinkColor = System.Drawing.Color.White;
+            this.lnkCloseProblemList.Location = new System.Drawing.Point(3, -1);
+            this.lnkCloseProblemList.Name = "lnkCloseProblemList";
+            this.lnkCloseProblemList.Size = new System.Drawing.Size(28, 28);
+            this.lnkCloseProblemList.TabIndex = 2;
+            this.lnkCloseProblemList.TabStop = true;
+            this.lnkCloseProblemList.Text = "✖";
+            this.toolTip1.SetToolTip(this.lnkCloseProblemList, "閉じる");
+            this.lnkCloseProblemList.VisitedLinkColor = System.Drawing.Color.White;
+            this.lnkCloseProblemList.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCloseProblemList_LinkClicked);
             // 
             // pnlModeSelect
             // 
@@ -299,6 +384,20 @@
             this.pnlProblem.Size = new System.Drawing.Size(650, 488);
             this.pnlProblem.TabIndex = 21;
             // 
+            // lnkEntryProblem
+            // 
+            this.lnkEntryProblem.AutoSize = true;
+            this.lnkEntryProblem.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lnkEntryProblem.LinkColor = System.Drawing.Color.White;
+            this.lnkEntryProblem.Location = new System.Drawing.Point(463, 5);
+            this.lnkEntryProblem.Name = "lnkEntryProblem";
+            this.lnkEntryProblem.Size = new System.Drawing.Size(61, 20);
+            this.lnkEntryProblem.TabIndex = 1;
+            this.lnkEntryProblem.TabStop = true;
+            this.lnkEntryProblem.Text = "新規登録";
+            this.lnkEntryProblem.VisitedLinkColor = System.Drawing.Color.White;
+            this.lnkEntryProblem.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEntryProblem_LinkClicked);
+            // 
             // dgvProblemList
             // 
             this.dgvProblemList.AllowUserToAddRows = false;
@@ -348,104 +447,6 @@
             this.title.ReadOnly = true;
             this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // lnkEntryProblem
-            // 
-            this.lnkEntryProblem.AutoSize = true;
-            this.lnkEntryProblem.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lnkEntryProblem.LinkColor = System.Drawing.Color.White;
-            this.lnkEntryProblem.Location = new System.Drawing.Point(463, 5);
-            this.lnkEntryProblem.Name = "lnkEntryProblem";
-            this.lnkEntryProblem.Size = new System.Drawing.Size(61, 20);
-            this.lnkEntryProblem.TabIndex = 1;
-            this.lnkEntryProblem.TabStop = true;
-            this.lnkEntryProblem.Text = "新規登録";
-            this.lnkEntryProblem.VisitedLinkColor = System.Drawing.Color.White;
-            // 
-            // lnkCloseProblemList
-            // 
-            this.lnkCloseProblemList.AutoSize = true;
-            this.lnkCloseProblemList.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lnkCloseProblemList.LinkColor = System.Drawing.Color.White;
-            this.lnkCloseProblemList.Location = new System.Drawing.Point(3, -1);
-            this.lnkCloseProblemList.Name = "lnkCloseProblemList";
-            this.lnkCloseProblemList.Size = new System.Drawing.Size(28, 28);
-            this.lnkCloseProblemList.TabIndex = 2;
-            this.lnkCloseProblemList.TabStop = true;
-            this.lnkCloseProblemList.Text = "✖";
-            this.toolTip1.SetToolTip(this.lnkCloseProblemList, "閉じる");
-            this.lnkCloseProblemList.VisitedLinkColor = System.Drawing.Color.White;
-            this.lnkCloseProblemList.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCloseProblemList_LinkClicked);
-            // 
-            // iconHome
-            // 
-            this.iconHome.Image = ((System.Drawing.Image)(resources.GetObject("iconHome.Image")));
-            this.iconHome.Location = new System.Drawing.Point(12, 12);
-            this.iconHome.Name = "iconHome";
-            this.iconHome.Size = new System.Drawing.Size(37, 37);
-            this.iconHome.TabIndex = 6;
-            this.iconHome.TabStop = false;
-            this.iconHome.Tag = "home";
-            this.toolTip1.SetToolTip(this.iconHome, "問題");
-            this.iconHome.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconHome.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconHome.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconProblem
-            // 
-            this.iconProblem.Image = ((System.Drawing.Image)(resources.GetObject("iconProblem.Image")));
-            this.iconProblem.Location = new System.Drawing.Point(12, 62);
-            this.iconProblem.Name = "iconProblem";
-            this.iconProblem.Size = new System.Drawing.Size(37, 37);
-            this.iconProblem.TabIndex = 5;
-            this.iconProblem.TabStop = false;
-            this.iconProblem.Tag = "problem";
-            this.toolTip1.SetToolTip(this.iconProblem, "問題の一覧を表示");
-            this.iconProblem.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconProblem.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconProblem.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconSettings
-            // 
-            this.iconSettings.Image = ((System.Drawing.Image)(resources.GetObject("iconSettings.Image")));
-            this.iconSettings.Location = new System.Drawing.Point(12, 212);
-            this.iconSettings.Name = "iconSettings";
-            this.iconSettings.Size = new System.Drawing.Size(37, 37);
-            this.iconSettings.TabIndex = 4;
-            this.iconSettings.TabStop = false;
-            this.iconSettings.Tag = "settings";
-            this.toolTip1.SetToolTip(this.iconSettings, "設定");
-            this.iconSettings.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconSettings.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconSettings.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconImport
-            // 
-            this.iconImport.Image = ((System.Drawing.Image)(resources.GetObject("iconImport.Image")));
-            this.iconImport.Location = new System.Drawing.Point(12, 112);
-            this.iconImport.Name = "iconImport";
-            this.iconImport.Size = new System.Drawing.Size(37, 37);
-            this.iconImport.TabIndex = 3;
-            this.iconImport.TabStop = false;
-            this.iconImport.Tag = "import";
-            this.toolTip1.SetToolTip(this.iconImport, "問題をImportする");
-            this.iconImport.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconImport.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconImport.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconExport
-            // 
-            this.iconExport.Image = ((System.Drawing.Image)(resources.GetObject("iconExport.Image")));
-            this.iconExport.Location = new System.Drawing.Point(12, 162);
-            this.iconExport.Name = "iconExport";
-            this.iconExport.Size = new System.Drawing.Size(37, 37);
-            this.iconExport.TabIndex = 2;
-            this.iconExport.TabStop = false;
-            this.iconExport.Tag = "export";
-            this.toolTip1.SetToolTip(this.iconExport, "問題をExportする");
-            this.iconExport.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconExport.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconExport.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
             // lnkSelectProblem
             // 
             this.lnkSelectProblem.AutoSize = true;
@@ -494,16 +495,16 @@
             this.Activated += new System.EventHandler(this.RegexpPracticeApp_Activated);
             this.Load += new System.EventHandler(this.RegexpPracticeAPp_Load);
             this.panel1.ResumeLayout(false);
-            this.pnlModeSelect.ResumeLayout(false);
-            this.pnlModeSelect.PerformLayout();
-            this.pnlProblem.ResumeLayout(false);
-            this.pnlProblem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).EndInit();
+            this.pnlModeSelect.ResumeLayout(false);
+            this.pnlModeSelect.PerformLayout();
+            this.pnlProblem.ResumeLayout(false);
+            this.pnlProblem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

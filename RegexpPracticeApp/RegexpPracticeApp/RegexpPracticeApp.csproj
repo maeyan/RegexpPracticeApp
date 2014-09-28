@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="View\ProblemEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ProblemEditForm.Designer.cs">
+      <DependentUpon>ProblemEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegexpForm.cs" />
     <Compile Include="RegexpPracticeException.cs" />
     <Compile Include="View\RegexpPracticeApp.cs">
@@ -75,6 +81,9 @@
     <Compile Include="View\vRegexpPracticeApp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\ProblemEditForm.resx">
+      <DependentUpon>ProblemEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RegexpPracticeApp.resx">
       <DependentUpon>RegexpPracticeApp.cs</DependentUpon>
     </EmbeddedResource>
