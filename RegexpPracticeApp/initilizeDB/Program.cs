@@ -33,7 +33,7 @@ namespace initilizeDB {
 
 
                     //[problem]tableの作成
-                    sql = "CREATE TABLE [problem] (" +
+                    sql = "CREATE TABLE [problemList] (" +
                             "[id]      INTEGER      PRIMARY KEY AUTOINCREMENT," +
                             "[title]   VARCHAR(50)  NOT NULL," +
                             "[problem] VARCHAR(500) NOT NULL," +
@@ -51,7 +51,7 @@ namespace initilizeDB {
 
                     //[matchData]tableの作成
                     sql = "CREATE TABLE [matchData] (" +
-                            "[problem_id]  INTEGER NOT NULL REFERENCES [problem]([id])," +
+                            "[problem_id]  INTEGER NOT NULL REFERENCES [problemList]([id])," +
                             "[type]        INTEGER NOT NULL REFERENCES [mst_match]([id])," +
                             "[matchIndex]  INTEGER NOT NULL," +
                             "[matchLength] INTEGER NOT NULL" +
