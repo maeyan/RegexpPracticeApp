@@ -56,9 +56,6 @@
             this.pnlProblem = new System.Windows.Forms.Panel();
             this.lnkEntryProblem = new System.Windows.Forms.LinkLabel();
             this.dgvProblemList = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.level = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lnkSelectProblem = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).BeginInit();
@@ -414,38 +411,14 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProblemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProblemList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.level,
-            this.title});
             this.dgvProblemList.Location = new System.Drawing.Point(49, 28);
+            this.dgvProblemList.MultiSelect = false;
             this.dgvProblemList.Name = "dgvProblemList";
             this.dgvProblemList.ReadOnly = true;
             this.dgvProblemList.RowHeadersVisible = false;
             this.dgvProblemList.RowTemplate.Height = 21;
             this.dgvProblemList.Size = new System.Drawing.Size(475, 432);
             this.dgvProblemList.TabIndex = 0;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // level
-            // 
-            this.level.HeaderText = "難易度";
-            this.level.Name = "level";
-            this.level.ReadOnly = true;
-            // 
-            // title
-            // 
-            this.title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.title.HeaderText = "タイトル";
-            this.title.Name = "title";
-            this.title.ReadOnly = true;
-            this.title.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // lnkSelectProblem
             // 
@@ -493,7 +466,7 @@
             this.Name = "RegexpPracticeApp";
             this.Text = "Regur Express Siren!";
             this.Activated += new System.EventHandler(this.RegexpPracticeApp_Activated);
-            this.Load += new System.EventHandler(this.RegexpPracticeAPp_Load);
+            this.Load += new System.EventHandler(this.RegexpPracticeApp_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();
@@ -539,9 +512,6 @@
         private System.Windows.Forms.CheckBox ckMultiLine;
         private System.Windows.Forms.Panel pnlProblem;
         private System.Windows.Forms.DataGridView dgvProblemList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn level;
-        private System.Windows.Forms.DataGridViewTextBoxColumn title;
         private System.Windows.Forms.LinkLabel lnkCloseProblemList;
         private System.Windows.Forms.LinkLabel lnkEntryProblem;
         private System.Windows.Forms.LinkLabel lnkSelectProblem;

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Resources;
 using System.Reflection;
 using RegexpPracticeApp.View;
+using System.Data.SQLite;
 
 namespace RegexpPracticeApp {
     public partial class RegexpPracticeApp : Form {
@@ -31,6 +32,7 @@ namespace RegexpPracticeApp {
             this.changeFreeMode();
 
             regexpForm = new RegexpForm(rtbResult, tbRegexp, tbReplace, ckIgnoreCase, ckMultiLine);
+
         }
 
         /// <summary>
@@ -71,9 +73,6 @@ namespace RegexpPracticeApp {
             bt.BackColor = Color.FromArgb(255, 99, 204);
         }
 
-        private void RegexpPracticeAPp_Load(object sender, EventArgs e) {
-
-        }
 
 
         /// <summary>
@@ -205,7 +204,7 @@ namespace RegexpPracticeApp {
         }
 
         private void lnkSelectProblem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem);
+            vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem, this.dgvProblemList);
         }
 
         private void lnkCloseProblemList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
@@ -222,5 +221,21 @@ namespace RegexpPracticeApp {
             form.Show();
             form.Dispose();
         }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
+            DataTable dataTable = new DataTable();
+            using (SQLiteConnection con = new SQLiteConnection("Data Source=Test.db")) {
+                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT [ROWID], [ユーザ名], [組織名] FROM Sample", con)) {
+                    //using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT id, level, title FROM problemList", con)) {
+                    adapter.Fill(dataTable);
+                }
+            }
+        }
+
+        private void RegexpPracticeApp_Load(object sender, EventArgs e) {
+
+        }
+
+
     }
 }

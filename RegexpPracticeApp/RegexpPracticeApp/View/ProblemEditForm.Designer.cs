@@ -23,6 +23,7 @@
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.tbProblem = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbTitle = new System.Windows.Forms.TextBox();
@@ -49,6 +50,7 @@
             this.ckIgnoreCase = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.rtbAnnotation = new System.Windows.Forms.RichTextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -62,10 +64,11 @@
             // 
             this.tbProblem.Location = new System.Drawing.Point(91, 95);
             this.tbProblem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbProblem.MaxLength = 500;
             this.tbProblem.Multiline = true;
             this.tbProblem.Name = "tbProblem";
             this.tbProblem.Size = new System.Drawing.Size(574, 66);
-            this.tbProblem.TabIndex = 0;
+            this.tbProblem.TabIndex = 2;
             // 
             // label1
             // 
@@ -81,17 +84,18 @@
             // 
             this.tbTitle.Location = new System.Drawing.Point(91, 59);
             this.tbTitle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbTitle.MaxLength = 50;
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(574, 25);
-            this.tbTitle.TabIndex = 8;
+            this.tbTitle.TabIndex = 1;
             // 
             // tbLevel
             // 
             this.tbLevel.Location = new System.Drawing.Point(91, 509);
             this.tbLevel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tbLevel.Multiline = true;
+            this.tbLevel.MaxLength = 3;
             this.tbLevel.Name = "tbLevel";
-            this.tbLevel.Size = new System.Drawing.Size(73, 26);
+            this.tbLevel.Size = new System.Drawing.Size(73, 25);
             this.tbLevel.TabIndex = 9;
             // 
             // btRegistry
@@ -112,19 +116,21 @@
             // 
             this.tbAnswer.Location = new System.Drawing.Point(91, 435);
             this.tbAnswer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbAnswer.MaxLength = 500;
             this.tbAnswer.Multiline = true;
             this.tbAnswer.Name = "tbAnswer";
             this.tbAnswer.Size = new System.Drawing.Size(574, 66);
-            this.tbAnswer.TabIndex = 15;
+            this.tbAnswer.TabIndex = 8;
             // 
             // rtbResult
             // 
             this.rtbResult.ForeColor = System.Drawing.Color.Black;
             this.rtbResult.Location = new System.Drawing.Point(91, 169);
             this.rtbResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rtbResult.MaxLength = 500;
             this.rtbResult.Name = "rtbResult";
             this.rtbResult.Size = new System.Drawing.Size(574, 168);
-            this.rtbResult.TabIndex = 17;
+            this.rtbResult.TabIndex = 3;
             this.rtbResult.Text = "";
             this.rtbResult.TextChanged += new System.EventHandler(this.rtbResult_TextChanged);
             // 
@@ -134,7 +140,8 @@
             this.tbRegexp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbRegexp.Name = "tbRegexp";
             this.tbRegexp.Size = new System.Drawing.Size(477, 25);
-            this.tbRegexp.TabIndex = 19;
+            this.tbRegexp.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.tbRegexp, "問題の答えとなる正規表現を入力してください(DBには登録されません)");
             this.tbRegexp.TextChanged += new System.EventHandler(this.tbRegexp_TextChanged);
             // 
             // panel1
@@ -277,7 +284,7 @@
             this.btExecute.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btExecute.Name = "btExecute";
             this.btExecute.Size = new System.Drawing.Size(91, 54);
-            this.btExecute.TabIndex = 30;
+            this.btExecute.TabIndex = 7;
             this.btExecute.Text = "正規表現実行";
             this.btExecute.UseVisualStyleBackColor = false;
             this.btExecute.Click += new System.EventHandler(this.btExecute_Click);
@@ -288,7 +295,7 @@
             this.ckMultiLine.Location = new System.Drawing.Point(190, 405);
             this.ckMultiLine.Name = "ckMultiLine";
             this.ckMultiLine.Size = new System.Drawing.Size(79, 22);
-            this.ckMultiLine.TabIndex = 32;
+            this.ckMultiLine.TabIndex = 6;
             this.ckMultiLine.Text = "MultiLine";
             this.ckMultiLine.UseVisualStyleBackColor = true;
             this.ckMultiLine.CheckedChanged += new System.EventHandler(this.ckMultiLine_CheckedChanged);
@@ -299,7 +306,7 @@
             this.ckIgnoreCase.Location = new System.Drawing.Point(91, 405);
             this.ckIgnoreCase.Name = "ckIgnoreCase";
             this.ckIgnoreCase.Size = new System.Drawing.Size(93, 22);
-            this.ckIgnoreCase.TabIndex = 31;
+            this.ckIgnoreCase.TabIndex = 5;
             this.ckIgnoreCase.Text = "IgnoreCase";
             this.ckIgnoreCase.UseVisualStyleBackColor = true;
             this.ckIgnoreCase.CheckedChanged += new System.EventHandler(this.ckIgnoreCase_CheckedChanged);
@@ -384,7 +391,6 @@
         private System.Windows.Forms.TextBox tbLevel;
         private System.Windows.Forms.Button btRegistry;
         private System.Windows.Forms.TextBox tbAnswer;
-        private System.Windows.Forms.RichTextBox rtbData;
         private System.Windows.Forms.RichTextBox rtbResult;
         private System.Windows.Forms.TextBox tbRegexp;
         private System.Windows.Forms.Panel panel1;
@@ -405,5 +411,6 @@
         private System.Windows.Forms.CheckBox ckIgnoreCase;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox rtbAnnotation;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

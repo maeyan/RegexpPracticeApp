@@ -23,7 +23,22 @@ namespace RegexpPracticeApp {
         }
 
         private void btRegistry_Click(object sender, EventArgs e) {
-            MessageBox.Show("登録");
+
+            if (!vProblemEditForm.Form.v_tbTitle(this.tbTitle)) { return; }
+            if (!vProblemEditForm.Form.v_tbProblem(this.tbProblem)) { return; }
+            if (!vProblemEditForm.Form.v_rtbResult(this.rtbResult)) { return; }
+            if (!vProblemEditForm.Form.v_tbProblem(this.tbAnswer)) { return; }
+            if (!vProblemEditForm.Form.v_tbLevel(this.tbLevel)) { return; }
+            if (!regexpForm.isMatch()) { return; }
+
+            RegexpDB db = new RegexpDB();
+            db.InsertRegexpProblem(this.tbTitle.Text, 
+                                   this.tbProblem.Text, 
+                                   this.rtbResult.Text, 
+                                   this.tbAnswer.Text, 
+                                   int.Parse(this.tbLevel.Text),
+                                   regexpForm.lastMatchData);
+
         }
 
         private void ProblemEditForm_Activated(object sender, EventArgs e) {
