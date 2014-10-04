@@ -51,7 +51,7 @@ namespace initilizeDB {
 
                     //[matchData]tableの作成
                     sql = "CREATE TABLE [matchData] (" +
-                            "[problem_id]  INTEGER NOT NULL REFERENCES [problemList]([id])," +
+                            "[problem_id]  INTEGER NOT NULL REFERENCES [problemList]([id]) ON DELETE CASCADE," +
                             "[type]        INTEGER NOT NULL REFERENCES [mst_match]([id])," +
                             "[matchIndex]  INTEGER NOT NULL," +
                             "[matchLength] INTEGER NOT NULL" +
