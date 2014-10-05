@@ -42,6 +42,9 @@ namespace RegexpPracticeApp{
                         cmd.Parameters["id"].Value = problemId;
                         cmd.Prepare();
 
+                        //色、太字解除しておく(自由入力モードで実行した後だと残る)
+                        RichTextBoxColorReset(rtbResult);
+                        RichTextBoxColorReset(rtbProblem);
                         using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                             while (reader.Read()) {
                                 tbMessage.Text = (string)reader[0];
