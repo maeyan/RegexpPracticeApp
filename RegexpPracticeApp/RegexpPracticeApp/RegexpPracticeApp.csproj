@@ -166,6 +166,9 @@
     <None Include="Resources\on_settings.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dgv_delete.png" />
+    <None Include="Resources\dgv_edit.png" />
+    <None Include="Resources\dgv_select.png" />
     <Content Include="Resources\hover_export.png" />
     <Content Include="Resources\hover_home.png" />
     <Content Include="Resources\hover_import.png" />

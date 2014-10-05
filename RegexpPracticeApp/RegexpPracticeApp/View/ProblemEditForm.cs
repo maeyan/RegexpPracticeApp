@@ -29,15 +29,25 @@ namespace RegexpPracticeApp {
             if (!vProblemEditForm.Form.v_rtbResult(this.rtbResult)) { return; }
             if (!vProblemEditForm.Form.v_tbProblem(this.tbAnswer)) { return; }
             if (!vProblemEditForm.Form.v_tbLevel(this.tbLevel)) { return; }
-            if (!regexpForm.isMatch()) { return; }
+            if (!regexpForm.isMatch()) {
+                MessageBox.Show("マッチする正規表現を記入してください");
+                return; 
+            }
 
             RegexpDB db = new RegexpDB();
-            db.InsertRegexpProblem(this.tbTitle.Text, 
-                                   this.tbProblem.Text, 
-                                   this.rtbResult.Text, 
-                                   this.tbAnswer.Text, 
-                                   int.Parse(this.tbLevel.Text),
-                                   regexpForm.lastMatchData);
+            try {
+                db.InsertRegexpProblem(this.tbTitle.Text,
+                                       this.tbProblem.Text,
+                                       this.rtbResult.Text,
+                                       this.tbAnswer.Text,
+                                       int.Parse(this.tbLevel.Text),
+                                       regexpForm.lastMatchData);
+            } catch(Exception ex){
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            this.Close();
 
         }
 

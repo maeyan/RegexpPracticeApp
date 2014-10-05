@@ -78,6 +78,27 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap dgv_delete {
+            get {
+                object obj = ResourceManager.GetObject("dgv_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dgv_edit {
+            get {
+                object obj = ResourceManager.GetObject("dgv_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dgv_select {
+            get {
+                object obj = ResourceManager.GetObject("dgv_select", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap hover_export {
             get {
                 object obj = ResourceManager.GetObject("hover_export", resourceCulture);

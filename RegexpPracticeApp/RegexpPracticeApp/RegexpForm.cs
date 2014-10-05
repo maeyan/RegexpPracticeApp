@@ -62,8 +62,7 @@ namespace RegexpPracticeApp {
             _rtbInputString.Select(selectPos, 0);
 
             try {
-                _lastMatchData = Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption());
-                foreach (Match match in _lastMatchData) {
+                foreach (Match match in Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption())) {
                     //全体マッチ
                     _rtbInputString.Select(match.Groups[0].Index, match.Groups[0].Length);
                     _rtbInputString.SelectionBackColor = Color.FromArgb(58, 243, 47);
@@ -112,9 +111,10 @@ namespace RegexpPracticeApp {
         }
 
         public bool isMatch() {
-            bool ret = true;
+            bool ret = false;
             try {
-                foreach (Match match in Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption())) {
+                _lastMatchData = Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption());
+                foreach (Match match in _lastMatchData) {
                     //全体マッチ
                     int index = match.Groups[0].Index;
                     int length = match.Groups[0].Length;
@@ -126,8 +126,8 @@ namespace RegexpPracticeApp {
                         _rtbInputString.Select(match.Groups[i].Index, match.Groups[i].Length);
                         _rtbInputString.SelectionFont = new Font(_rtbInputString.SelectionFont, FontStyle.Bold);
                     }
-
-                }
+                    ret = true;
+                }                
             } catch {
                 ret = false;
             } 

@@ -330,6 +330,7 @@
             this.btAnswer.TabIndex = 17;
             this.btAnswer.Text = "答え";
             this.btAnswer.UseVisualStyleBackColor = false;
+            this.btAnswer.Click += new System.EventHandler(this.btAnswer_Click);
             this.btAnswer.MouseEnter += new System.EventHandler(this.bt_MouseEnter);
             this.btAnswer.MouseLeave += new System.EventHandler(this.bt_MouseLeave);
             // 
@@ -399,6 +400,8 @@
             // 
             this.dgvProblemList.AllowUserToAddRows = false;
             this.dgvProblemList.AllowUserToDeleteRows = false;
+            this.dgvProblemList.AllowUserToResizeColumns = false;
+            this.dgvProblemList.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
             this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProblemList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
@@ -419,6 +422,7 @@
             this.dgvProblemList.RowTemplate.Height = 21;
             this.dgvProblemList.Size = new System.Drawing.Size(475, 432);
             this.dgvProblemList.TabIndex = 0;
+            this.dgvProblemList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProblemList_CellContentClick);
             // 
             // lnkSelectProblem
             // 

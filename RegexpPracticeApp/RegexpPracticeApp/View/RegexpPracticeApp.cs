@@ -220,6 +220,8 @@ namespace RegexpPracticeApp {
             form.ShowDialog(this);
             form.Show();
             form.Dispose();
+
+            vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem, this.dgvProblemList);
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
@@ -232,7 +234,32 @@ namespace RegexpPracticeApp {
             }
         }
 
+        private void dgvProblemList_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            DataGridView dgv = (DataGridView)sender;
+
+            string id = dgv.CurrentRow.Cells[1].Value.ToString();
+
+            if (dgv.Columns[e.ColumnIndex].Name == "選択") {
+            
+            } else if (dgv.Columns[e.ColumnIndex].Name == "編集") {
+
+            } else if (dgv.Columns[e.ColumnIndex].Name == "削除") {
+                RegexpDB db = new RegexpDB();
+                try {
+                    db.DeleteProblemList(id);         //削除
+                    db.LoadTitleList(dgvProblemList); //更新
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+        }
+
         private void RegexpPracticeApp_Load(object sender, EventArgs e) {
+
+        }
+
+        private void btAnswer_Click(object sender, EventArgs e) {
 
         }
 
