@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Drawing;
+using System.Reflection;
 
 namespace RegexpPracticeApp{
     class RegexpDB : IDisposable{
@@ -28,12 +29,85 @@ namespace RegexpPracticeApp{
             }
         }
 
+        public void SelectProblemList(string problemId, TextBox tbMessage, RichTextBox rtbResult, RichTextBox rtbProblem){
+            using (SQLiteTransaction trans = con.BeginTransaction()) {
+                try {
+                    using (SQLiteCommand cmd = con.CreateCommand()) {
+                        string sql = "";
+                        
+                        sql = "SELECT [problem], [data] FROM [problemList] WHERE [id] = @id;";
+                        cmd.CommandText = sql;
+                        
+                        cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                        cmd.Parameters["id"].Value = problemId;
+                        cmd.Prepare();
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                            while (reader.Read()) {
+                                tbMessage.Text = (string)reader[0];
+                                rtbResult.Text = (string)reader[1];
+                                rtbProblem.Text = (string)reader[1];
+                            }
+                        }
+
+                        sql = "SELECT [type], [matchIndex], [matchLength] FROM [matchData] WHERE [problem_id] = @problemId;";
+                        cmd.CommandText = sql;
+
+                        cmd.Parameters.Add("problemId", System.Data.DbType.Int32);
+                        cmd.Parameters["problemId"].Value = problemId;
+                        cmd.Prepare();
+
+
+                        int selectPos = rtbProblem.SelectionStart;
+                        rtbProblem.Select(selectPos, 0);
+                        RichTextBoxColorReset(rtbProblem);
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                            while (reader.Read()) {
+                                
+                                int index = Convert.ToInt32(reader[1]);
+                                int length = Convert.ToInt32(reader[2]);
+                                if (RegexpDB.ALL_MATCH == Convert.ToInt32(reader[0])) {
+                                    //全体マッチ
+                                    rtbProblem.Select(index, length);
+                                    rtbProblem.SelectionBackColor = Color.FromArgb(58, 243, 47);
+                                
+                                } else if (RegexpDB.GROUP_MATCH == Convert.ToInt32(reader[0])) {
+                                    //部分マッチ
+                                    rtbProblem.Select(index, length);
+                                    rtbProblem.SelectionFont = new Font(rtbProblem.SelectionFont, FontStyle.Bold);
+
+                                } else {
+                                    string className = this.GetType().FullName;
+                                    string methodName = MethodBase.GetCurrentMethod().Name;
+                                    string errorMessage = "[Class]：" + className + "\n" +
+                                                          "[Method]：" + methodName + "\n" +
+                                                          "typeの値が不正です";
+                                    throw new RegexpPracticeException(errorMessage);
+
+                                }
+                            }
+                        }
+
+                        rtbProblem.SelectionStart = selectPos;
+                        rtbProblem.Select(selectPos, 0);
+                    }
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
+        }
+
         public void DeleteProblemList(string problemId) {
             using (SQLiteTransaction trans = con.BeginTransaction()) {
                 try {
                     using (SQLiteCommand cmd = con.CreateCommand()) {
-                        string sql = "DELETE FROM [problemList] WHERE [id] = " + problemId + ";";
+                        string sql = "DELETE FROM [problemList] WHERE [id] = @problemId;";
                         cmd.CommandText = sql;
+
+                        cmd.Parameters.Add("problemId", System.Data.DbType.Int32);
+                        cmd.Parameters["problemId"].Value = problemId;
+
                         cmd.ExecuteNonQuery();
                     }
 
@@ -43,6 +117,19 @@ namespace RegexpPracticeApp{
 
                 }
             }
+        }
+
+        private void RichTextBoxColorReset(RichTextBox rtbProblem) {
+            if (rtbProblem.Text == "") { return; }
+
+            int selectPos = rtbProblem.SelectionStart;
+            rtbProblem.SelectAll();
+            rtbProblem.SelectionBackColor = Color.White;
+            //ときおり、input.SelectionFontがnullを返しエラーとなるのでnullの時は何もしない
+            if (rtbProblem.SelectionFont != null) {
+                rtbProblem.SelectionFont = new Font(rtbProblem.SelectionFont, FontStyle.Regular);
+            }
+            rtbProblem.SelectionStart = selectPos;
         }
 
         public void LoadTitleList(DataGridView dgvProblemList) {
@@ -56,7 +143,7 @@ namespace RegexpPracticeApp{
             ////ボタンを追加
             DataGridViewImageColumn dgvColumnSelect = new DataGridViewImageColumn();
             dgvColumnSelect.Name = "選択";
-            dgvColumnSelect.Image = new Bitmap(Properties.Resources.dgv_edit);
+            dgvColumnSelect.Image = new Bitmap(Properties.Resources.dgv_select);
             dgvColumnSelect.ImageLayout = DataGridViewImageCellLayout.Normal;
             dgvProblemList.Columns.Add(dgvColumnSelect);
             dgvProblemList.Columns[dgvProblemList.Columns.Count - 1].Width = 50;
@@ -192,9 +279,7 @@ namespace RegexpPracticeApp{
         public int last_insert_id(SQLiteCommand cmd, string tableName) {
             cmd.CommandText = "select last_insert_rowid();";
             string rowid = cmd.ExecuteScalar().ToString();
-
-            cmd.CommandText = "select id from " + tableName + " WHERE rowid = " + rowid + ";";
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            return int.Parse(rowid);
         }
 
         public void Dispose() {

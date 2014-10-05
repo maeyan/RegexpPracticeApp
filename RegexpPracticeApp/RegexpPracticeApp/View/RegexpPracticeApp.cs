@@ -97,10 +97,8 @@ namespace RegexpPracticeApp {
             this.rbSearch.Checked = true;
 
             //RichTextBox
-            this.rtbProblem.Enabled = true;
             this.rtbProblem.Text = "";
             this.rtbProblem.ReadOnly = false;
-            this.rtbResult.Enabled = true;
             this.rtbResult.ReadOnly = false;
             this.rtbResult.Text = "";
             this.rtbResult.Width = 554;            
@@ -135,13 +133,14 @@ namespace RegexpPracticeApp {
             this.pnlModeSelect.Visible = false;
 
             //RichTextBox
-            this.rtbProblem.Enabled = false;
+            //this.rtbProblem.Enabled = false;
             this.rtbProblem.Text = "";
             this.rtbProblem.ReadOnly = true;
-            this.rtbResult.Enabled = false;
+            this.rtbProblem.ForeColor = Color.Black;
             this.rtbResult.ReadOnly = true;
             this.rtbResult.Text = "";
             this.rtbResult.Width = 271;
+            this.rtbResult.ForeColor = Color.Black;
 
             //TextBox
             this.tbMessage.Text = "問題を選択してください";
@@ -240,7 +239,15 @@ namespace RegexpPracticeApp {
             string id = dgv.CurrentRow.Cells[1].Value.ToString();
 
             if (dgv.Columns[e.ColumnIndex].Name == "選択") {
-            
+                RegexpDB db = new RegexpDB();
+                try {
+                    db.SelectProblemList(id, this.tbMessage, this.rtbResult, this.rtbProblem);
+                    vRegexpPracticeApp.Problem.CloseProblemPanel(this.pnlProblem);
+                }catch(Exception ex){
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                
             } else if (dgv.Columns[e.ColumnIndex].Name == "編集") {
 
             } else if (dgv.Columns[e.ColumnIndex].Name == "削除") {
