@@ -104,6 +104,7 @@ namespace RegexpPracticeApp {
             this.rtbResult.Width = 554;            
 
             //TextBox
+            this.tbMessage.Tag = "";
             this.tbMessage.Text = "自由入力モードです";
             this.tbMessage.Width = 554;
             this.tbRegexp.Focus();
@@ -143,6 +144,7 @@ namespace RegexpPracticeApp {
             this.rtbResult.ForeColor = Color.Black;
 
             //TextBox
+            this.tbMessage.Tag = "";
             this.tbMessage.Text = "問題を選択してください";
             this.tbMessage.Width = 504;
             this.tbRegexp.Text = "";
@@ -251,8 +253,8 @@ namespace RegexpPracticeApp {
             } else if (dgv.Columns[e.ColumnIndex].Name == "編集") {
 
             } else if (dgv.Columns[e.ColumnIndex].Name == "削除") {
-                RegexpDB db = new RegexpDB();
                 try {
+                    RegexpDB db = new RegexpDB();
                     db.DeleteProblemList(id);         //削除
                     db.LoadTitleList(dgvProblemList); //更新
                 } catch (Exception ex) {
@@ -268,8 +270,14 @@ namespace RegexpPracticeApp {
 
         private void btAnswer_Click(object sender, EventArgs e) {
 
+            string id = (string)this.tbMessage.Tag;
+            try {
+                RegexpDB db = new RegexpDB();
+                db.SelectAnswerFromProblemList(id, this.tbMessage);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
-
-
     }
 }

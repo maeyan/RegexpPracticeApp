@@ -62,6 +62,7 @@ namespace RegexpPracticeApp{
                         rtbProblem.Select(selectPos, 0);
                         RichTextBoxColorReset(rtbProblem);
 
+                        tbMessage.Tag = "";
                         using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                             while (reader.Read()) {
                                 
@@ -91,6 +92,33 @@ namespace RegexpPracticeApp{
 
                         rtbProblem.SelectionStart = selectPos;
                         rtbProblem.Select(selectPos, 0);
+
+                        tbMessage.Tag = problemId;
+                    }
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
+        }
+
+        public void SelectAnswerFromProblemList(string id, TextBox tbMessage) {
+            using (SQLiteTransaction trans = con.BeginTransaction()) {
+                try {
+                    using (SQLiteCommand cmd = con.CreateCommand()) {
+                        string sql = "SELECT [problem], [answer] FROM [problemList] WHERE [id] = @id;";
+                        cmd.CommandText = sql;
+
+                        cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                        cmd.Parameters["id"].Value = id;
+                        cmd.Prepare();
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                            while (reader.Read()) {
+                                tbMessage.Text = (string)reader[0] + System.Environment.NewLine +
+                                                 "■答え" + System.Environment.NewLine +
+                                                 (string)reader[1];
+                            }
+                        }
                     }
                 } catch (Exception ex) {
                     throw ex;
@@ -114,7 +142,6 @@ namespace RegexpPracticeApp{
                     trans.Commit();
                 } catch (Exception ex) {
                     throw ex;
-
                 }
             }
         }

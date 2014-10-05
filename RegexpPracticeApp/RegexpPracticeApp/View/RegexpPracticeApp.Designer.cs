@@ -25,8 +25,8 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexpPracticeApp));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconHome = new System.Windows.Forms.PictureBox();
             this.iconProblem = new System.Windows.Forms.PictureBox();
@@ -157,7 +157,7 @@
             // tbMessage
             // 
             this.tbMessage.BackColor = System.Drawing.Color.White;
-            this.tbMessage.Location = new System.Drawing.Point(66, 23);
+            this.tbMessage.Location = new System.Drawing.Point(72, 28);
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ReadOnly = true;
@@ -169,9 +169,9 @@
             this.rtbProblem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.rtbProblem.ForeColor = System.Drawing.Color.DarkGray;
-            this.rtbProblem.Location = new System.Drawing.Point(351, 112);
+            this.rtbProblem.Location = new System.Drawing.Point(357, 117);
             this.rtbProblem.Name = "rtbProblem";
-            this.rtbProblem.Size = new System.Drawing.Size(271, 240);
+            this.rtbProblem.Size = new System.Drawing.Size(271, 235);
             this.rtbProblem.TabIndex = 4;
             this.rtbProblem.Text = "";
             // 
@@ -179,9 +179,9 @@
             // 
             this.rtbResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.rtbResult.Location = new System.Drawing.Point(66, 112);
+            this.rtbResult.Location = new System.Drawing.Point(72, 117);
             this.rtbResult.Name = "rtbResult";
-            this.rtbResult.Size = new System.Drawing.Size(271, 240);
+            this.rtbResult.Size = new System.Drawing.Size(271, 235);
             this.rtbResult.TabIndex = 5;
             this.rtbResult.Text = "";
             this.rtbResult.TextChanged += new System.EventHandler(this.rtbResult_TextChanged);
@@ -232,7 +232,7 @@
             // lbUser
             // 
             this.lbUser.AutoSize = true;
-            this.lbUser.Location = new System.Drawing.Point(66, 91);
+            this.lbUser.Location = new System.Drawing.Point(72, 96);
             this.lbUser.Name = "lbUser";
             this.lbUser.Size = new System.Drawing.Size(20, 18);
             this.lbUser.TabIndex = 11;
@@ -241,7 +241,7 @@
             // lbSystem
             // 
             this.lbSystem.AutoSize = true;
-            this.lbSystem.Location = new System.Drawing.Point(348, 91);
+            this.lbSystem.Location = new System.Drawing.Point(354, 96);
             this.lbSystem.Name = "lbSystem";
             this.lbSystem.Size = new System.Drawing.Size(20, 18);
             this.lbSystem.TabIndex = 12;
@@ -325,7 +325,7 @@
             this.btAnswer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(165)))), ((int)(((byte)(231)))));
             this.btAnswer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAnswer.ForeColor = System.Drawing.Color.White;
-            this.btAnswer.Location = new System.Drawing.Point(570, 23);
+            this.btAnswer.Location = new System.Drawing.Point(576, 28);
             this.btAnswer.Name = "btAnswer";
             this.btAnswer.Size = new System.Drawing.Size(50, 65);
             this.btAnswer.TabIndex = 17;
@@ -403,17 +403,17 @@
             this.dgvProblemList.AllowUserToDeleteRows = false;
             this.dgvProblemList.AllowUserToResizeColumns = false;
             this.dgvProblemList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
-            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
+            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvProblemList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvProblemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProblemList.Location = new System.Drawing.Point(49, 28);
             this.dgvProblemList.MultiSelect = false;
