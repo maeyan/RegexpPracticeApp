@@ -62,7 +62,8 @@ namespace RegexpPracticeApp {
             _rtbInputString.Select(selectPos, 0);
 
             try {
-                foreach (Match match in Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption())) {
+                _lastMatchData = Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption());
+                foreach (Match match in _lastMatchData) {
                     //全体マッチ
                     _rtbInputString.Select(match.Groups[0].Index, match.Groups[0].Length);
                     _rtbInputString.SelectionBackColor = Color.FromArgb(58, 243, 47);

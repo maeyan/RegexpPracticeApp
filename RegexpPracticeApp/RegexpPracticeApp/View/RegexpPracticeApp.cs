@@ -10,6 +10,7 @@ using System.Resources;
 using System.Reflection;
 using RegexpPracticeApp.View;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 namespace RegexpPracticeApp {
     public partial class RegexpPracticeApp : Form {
@@ -176,12 +177,28 @@ namespace RegexpPracticeApp {
         }
 
         private void btExecute_Click(object sender, EventArgs e) {
+            
             if(this.rbSearch.Checked){
                 regexpForm.execMatch();
             
             }else if(this.rbReplace.Checked){
                 regexpForm.execReplace();
             }
+
+            //出題モードの時は、あってたかどうか判定する
+            if (vRegexpPracticeApp.SwitchIcon.ActivePictureBox.Name == "iconProblem") {
+                string id = (string)this.tbMessage.Tag;
+                MatchCollection lastMatchData = regexpForm.lastMatchData;
+                RegexpDB db = new RegexpDB();
+                if (db.isMatchData(id, lastMatchData)) {
+                    MessageBox.Show("正解");
+
+                } else {
+                    MessageBox.Show("不正解");
+                }
+
+            }
+
         }
 
         private void rtbResult_TextChanged(object sender, EventArgs e) {

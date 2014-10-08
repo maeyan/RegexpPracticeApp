@@ -29,6 +29,65 @@ namespace RegexpPracticeApp{
             }
         }
 
+        public bool isMatchData(string id, MatchCollection mc) {
+            if (mc == null) { return false; }
+
+            //DBからマッチ情報を取得する
+            using (SQLiteCommand cmd = con.CreateCommand()) {
+                string sql = "SELECT [type], [matchIndex], [matchLength] FROM [matchData] WHERE [problem_id] = @id ORDER BY [ROWID];";
+                cmd.CommandText = sql;
+
+                cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                cmd.Parameters["id"].Value = id;
+                cmd.Prepare();
+
+                List<int[]> rightData = new List<int[]>();
+                using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        rightData.Add(new int[] { Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2]) });
+                    }
+                }
+
+                //正規表現にマッチした結果と比較する
+                int count = 0;
+                foreach (Match match in mc) {
+
+                    count++;
+                    int index = match.Groups[0].Index;
+                    int length = match.Groups[0].Length;
+
+                    //判定
+                    if (rightData.Count < count) {
+                        //DBの方がデータがすくない時間違い
+                        return false;
+                    } else if (rightData[count - 1][0] != ALL_MATCH || rightData[count - 1][1] != index || rightData[count - 1][2] != length) {
+                        //データが一致しないので間違い
+                        return false;
+                    }
+
+                    for (int i = 1; i < match.Groups.Count; i++) {
+                        count++;
+                        index = match.Groups[i].Index;
+                        length = match.Groups[i].Length;
+
+                        //判定
+                        if (rightData.Count < count) {
+                            //DBの方がデータがすくない時間違い
+                            return false;
+                        } else if (rightData[count - 1][0] != GROUP_MATCH || rightData[count - 1][1] != index || rightData[count - 1][2] != length) {
+                            //データが一致しないので間違い
+                            return false;
+                        }
+                    }
+                }
+
+                //DBにあるデータの方が多い時は、データが一致しないので間違い
+                if (count < rightData.Count) { return false; }
+            }
+
+            return true;
+        }
+
         public void SelectProblemList(string problemId, TextBox tbMessage, RichTextBox rtbResult, RichTextBox rtbProblem){
             using (SQLiteTransaction trans = con.BeginTransaction()) {
                 try {
@@ -116,6 +175,9 @@ namespace RegexpPracticeApp{
                         cmd.Prepare();
 
                         using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                            if(reader.HasRows==false){
+                                MessageBox.Show("問題に該当するデータ（答え）が取得できません");
+                            }
                             while (reader.Read()) {
                                 tbMessage.Text = (string)reader[0] + System.Environment.NewLine +
                                                  "■答え" + System.Environment.NewLine +
