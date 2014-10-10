@@ -29,6 +29,41 @@ namespace RegexpPracticeApp{
             }
         }
 
+        public void LoadData(string id, TextBox tbTitle, TextBox tbProblem,RichTextBox rtbResult, TextBox tbAnswer, TextBox tbLevel) {
+            using (SQLiteCommand cmd = con.CreateCommand()) {
+                //IDが存在するかチェック
+                string sql = "";
+                sql = "SELECT COUNT(*) FROM [problemList] WHERE [id] = @id;";
+                cmd.CommandText = sql;
+                cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                cmd.Parameters["id"].Value = id;
+                cmd.Prepare();
+
+                if (Convert.ToInt32(cmd.ExecuteScalar()) != 1) {
+                    throw new RegexpPracticeException("データベースに、編集しようとしているデータが見つかりません");
+                }
+
+
+                sql = "SELECT [title], [problem], [data], [answer], [level] FROM [problemList] WHERE [id] = @id;";
+                cmd.CommandText = sql;
+                cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                cmd.Parameters["id"].Value = id;
+                cmd.Prepare();
+
+                using (SQLiteDataReader reader = cmd.ExecuteReader()) {
+                    while (reader.Read()) {
+                        tbTitle.Text = reader[0].ToString();
+                        tbProblem.Text = reader[1].ToString();
+                        rtbResult.Text = reader[2].ToString();
+                        tbAnswer.Text = reader[3].ToString();
+                        tbLevel.Text = reader[4].ToString();
+                    }                    
+                }
+            }        
+            
+            
+        }
+
         public bool isMatchData(string id, MatchCollection mc) {
             if (mc == null) { return false; }
 
@@ -221,6 +256,7 @@ namespace RegexpPracticeApp{
             if (rtbProblem.SelectionFont != null) {
                 rtbProblem.SelectionFont = new Font(rtbProblem.SelectionFont, FontStyle.Regular);
             }
+            rtbProblem.SelectionLength = 0;
             rtbProblem.SelectionStart = selectPos;
         }
 
@@ -272,6 +308,102 @@ namespace RegexpPracticeApp{
                 dgvProblemList[3, 0].Selected = true;
             }
             
+        }
+
+        public void UpdateRegexpProblem(string id, string title, string problem, string data, string answer, int level, MatchCollection matches) {
+            using (SQLiteCommand cmd = con.CreateCommand()) {
+                try {
+                    //IDが存在するかチェック
+                    string sql = "";
+                    sql = "SELECT COUNT(*) FROM [problemList] WHERE [id] = @id;";
+                    cmd.CommandText = sql;
+                    cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                    cmd.Parameters["id"].Value = id;
+                    cmd.Prepare();
+
+                    if (Convert.ToInt32(cmd.ExecuteScalar()) != 1) {
+                        throw new RegexpPracticeException("データベースに、編集しようとしているデータが見つかりません");
+                    }
+
+
+                    //ProblemListテーブルに追加
+                    this.UpdateProblemListTable(cmd, id, title, problem, data, answer, level);
+
+                    //matchDataを削除
+                    sql = "DELETE FROM [matchData] WHERE [problem_id] = @id;";
+                    cmd.CommandText = sql;
+                    cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                    cmd.Parameters["id"].Value = id;
+                    cmd.ExecuteNonQuery();
+
+                    //matchDataテーブルに追加
+                    int problem_id = Convert.ToInt32(id);
+                    foreach (Match match in matches) {
+                        //全体マッチ
+                        int index = match.Groups[0].Index;
+                        int length = match.Groups[0].Length;
+
+                        //matchDataテーブルに追加(全体マッチ)
+                        this.InsertMatchDataTable(cmd, problem_id, ALL_MATCH, index, length);
+
+                        for (int i = 1; i < match.Groups.Count; i++) {
+                            //部分マッチ
+                            index = match.Groups[i].Index;
+                            length = match.Groups[i].Length;
+
+                            //matchDataテーブルに追加(グループマッチ)
+                            this.InsertMatchDataTable(cmd, problem_id, GROUP_MATCH, index, length);
+                        }
+                    }
+
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
+        }
+
+
+        public void UpdateProblemListTable(SQLiteCommand cmd, string id, string title, string problem, string data, string answer, int level) {
+            using (SQLiteTransaction trans = con.BeginTransaction()) {
+                try {
+                    string sql = "UPDATE [problemList] " +
+                                 "SET [title] = @title, [problem] = @problem, [data] = @data, " +
+                                     "[answer] = @answer, [level] = @level, [mtime] = @mtime " +
+                                     "WHERE id = @id;";
+
+                    //problemListテーブルに追加
+                    cmd.CommandText = sql;
+
+                    cmd.Parameters.Add("title", System.Data.DbType.String);
+                    cmd.Parameters["title"].Value = title;
+
+                    cmd.Parameters.Add("problem", System.Data.DbType.String);
+                    cmd.Parameters["problem"].Value = problem;
+
+                    cmd.Parameters.Add("data", System.Data.DbType.String);
+                    cmd.Parameters["data"].Value = data;
+
+                    cmd.Parameters.Add("answer", System.Data.DbType.String);
+                    cmd.Parameters["answer"].Value = answer;
+
+                    cmd.Parameters.Add("level", System.Data.DbType.Int32);
+                    cmd.Parameters["level"].Value = level;
+
+                    string currentTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    cmd.Parameters.Add("mtime", System.Data.DbType.String);
+                    cmd.Parameters["mtime"].Value = currentTime;
+
+                    cmd.Parameters.Add("id", System.Data.DbType.Int32);
+                    cmd.Parameters["id"].Value = id;
+
+                    cmd.ExecuteNonQuery();
+
+                    trans.Commit();
+
+                } catch (Exception ex) {
+                    throw ex;
+                }
+            }
         }
 
         public void InsertRegexpProblem(string title, string problem, string data, string answer, int level, MatchCollection matches) {
@@ -335,37 +467,41 @@ namespace RegexpPracticeApp{
         }
 
         private void InsertProblemListTable(SQLiteCommand cmd, string title, string problem, string data, string answer, int level) {
-            
-            string sql = "INSERT INTO [problemList] " +
-                           "([title], [problem], [data], [answer], [level], [ctime], [mtime]) " +
-                           "VALUES(@title, @problem, @data, @answer, @level, @ctime, @mtime);";
+            try {
+                string sql = "INSERT INTO [problemList] " +
+                               "([title], [problem], [data], [answer], [level], [ctime], [mtime]) " +
+                               "VALUES(@title, @problem, @data, @answer, @level, @ctime, @mtime);";
 
-            //problemListテーブルに追加
-            cmd.CommandText = sql;
+                //problemListテーブルに追加
+                cmd.CommandText = sql;
 
-            cmd.Parameters.Add("title", System.Data.DbType.String);
-            cmd.Parameters["title"].Value = title;
+                cmd.Parameters.Add("title", System.Data.DbType.String);
+                cmd.Parameters["title"].Value = title;
 
-            cmd.Parameters.Add("problem", System.Data.DbType.String);
-            cmd.Parameters["problem"].Value = problem;
+                cmd.Parameters.Add("problem", System.Data.DbType.String);
+                cmd.Parameters["problem"].Value = problem;
 
-            cmd.Parameters.Add("data", System.Data.DbType.String);
-            cmd.Parameters["data"].Value = data;
+                cmd.Parameters.Add("data", System.Data.DbType.String);
+                cmd.Parameters["data"].Value = data;
 
-            cmd.Parameters.Add("answer", System.Data.DbType.String);
-            cmd.Parameters["answer"].Value = answer;
+                cmd.Parameters.Add("answer", System.Data.DbType.String);
+                cmd.Parameters["answer"].Value = answer;
 
-            cmd.Parameters.Add("level", System.Data.DbType.Int32);
-            cmd.Parameters["level"].Value = level;
+                cmd.Parameters.Add("level", System.Data.DbType.Int32);
+                cmd.Parameters["level"].Value = level;
 
-            string currentTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            cmd.Parameters.Add("ctime", System.Data.DbType.String);
-            cmd.Parameters["ctime"].Value = currentTime;
+                string currentTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                cmd.Parameters.Add("ctime", System.Data.DbType.String);
+                cmd.Parameters["ctime"].Value = currentTime;
 
-            cmd.Parameters.Add("mtime", System.Data.DbType.String);
-            cmd.Parameters["mtime"].Value = currentTime;
+                cmd.Parameters.Add("mtime", System.Data.DbType.String);
+                cmd.Parameters["mtime"].Value = currentTime;
 
-            cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+            } catch (Exception ex) {
+                throw ex;
+            }
         }
 
         public int last_insert_id(SQLiteCommand cmd, string tableName) {

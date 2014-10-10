@@ -44,13 +44,14 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lb_Title = new System.Windows.Forms.Label();
             this.btExecute = new System.Windows.Forms.Button();
             this.ckMultiLine = new System.Windows.Forms.CheckBox();
             this.ckIgnoreCase = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.rtbAnnotation = new System.Windows.Forms.RichTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btCancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -111,6 +112,8 @@
             this.btRegistry.Text = "登録";
             this.btRegistry.UseVisualStyleBackColor = false;
             this.btRegistry.Click += new System.EventHandler(this.btRegistry_Click);
+            this.btRegistry.MouseEnter += new System.EventHandler(this.bt_MouseEnter);
+            this.btRegistry.MouseLeave += new System.EventHandler(this.bt_MouseLeave);
             // 
             // tbAnswer
             // 
@@ -257,23 +260,23 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(81)))), ((int)(((byte)(81)))));
-            this.panel8.Controls.Add(this.label3);
+            this.panel8.Controls.Add(this.lb_Title);
             this.panel8.Location = new System.Drawing.Point(12, 13);
             this.panel8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(653, 41);
             this.panel8.TabIndex = 29;
             // 
-            // label3
+            // lb_Title
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("メイリオ", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(3, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 31);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "新規登録";
+            this.lb_Title.AutoSize = true;
+            this.lb_Title.Font = new System.Drawing.Font("メイリオ", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lb_Title.ForeColor = System.Drawing.Color.White;
+            this.lb_Title.Location = new System.Drawing.Point(3, 5);
+            this.lb_Title.Name = "lb_Title";
+            this.lb_Title.Size = new System.Drawing.Size(98, 31);
+            this.lb_Title.TabIndex = 2;
+            this.lb_Title.Text = "新規登録";
             // 
             // btExecute
             // 
@@ -288,6 +291,8 @@
             this.btExecute.Text = "正規表現実行";
             this.btExecute.UseVisualStyleBackColor = false;
             this.btExecute.Click += new System.EventHandler(this.btExecute_Click);
+            this.btExecute.MouseEnter += new System.EventHandler(this.bt_MouseEnter);
+            this.btExecute.MouseLeave += new System.EventHandler(this.bt_MouseLeave);
             // 
             // ckMultiLine
             // 
@@ -334,12 +339,29 @@
             this.rtbAnnotation.TabIndex = 34;
             this.rtbAnnotation.Text = "※正規表現全体に一致⇒緑背景色／カッコに一致⇒緑背景色＋太字";
             // 
+            // btCancel
+            // 
+            this.btCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(165)))), ((int)(((byte)(231)))));
+            this.btCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCancel.ForeColor = System.Drawing.Color.White;
+            this.btCancel.Location = new System.Drawing.Point(477, 509);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btCancel.Name = "btCancel";
+            this.btCancel.Size = new System.Drawing.Size(91, 35);
+            this.btCancel.TabIndex = 35;
+            this.btCancel.Text = "キャンセル";
+            this.btCancel.UseVisualStyleBackColor = false;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+            this.btCancel.MouseEnter += new System.EventHandler(this.bt_MouseEnter);
+            this.btCancel.MouseLeave += new System.EventHandler(this.bt_MouseLeave);
+            // 
             // ProblemEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(677, 559);
+            this.Controls.Add(this.btCancel);
             this.Controls.Add(this.rtbAnnotation);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ckMultiLine);
@@ -364,6 +386,7 @@
             this.Name = "ProblemEditForm";
             this.Text = "ProblemEditForm";
             this.Activated += new System.EventHandler(this.ProblemEditForm_Activated);
+            this.Load += new System.EventHandler(this.ProblemEditForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -405,12 +428,13 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lb_Title;
         private System.Windows.Forms.Button btExecute;
         private System.Windows.Forms.CheckBox ckMultiLine;
         private System.Windows.Forms.CheckBox ckIgnoreCase;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox rtbAnnotation;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btCancel;
     }
 }

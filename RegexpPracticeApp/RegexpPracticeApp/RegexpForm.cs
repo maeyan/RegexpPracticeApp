@@ -48,6 +48,8 @@ namespace RegexpPracticeApp {
             if (_rtbInputString.SelectionFont != null) {
                 _rtbInputString.SelectionFont = new Font(_rtbInputString.SelectionFont, FontStyle.Regular);
             }
+
+            _rtbInputString.SelectionLength = 0;
             _rtbInputString.SelectionStart = selectPos;
         }
 

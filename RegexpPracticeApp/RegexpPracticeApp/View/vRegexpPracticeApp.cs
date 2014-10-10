@@ -77,6 +77,7 @@ namespace RegexpPracticeApp.View{
         }
 
         public class Problem {
+
             static public void ShowProblemPanel(Panel pnl, DataGridView dgvProblemList) {
 
                 //DataBaseからデータを読み込む

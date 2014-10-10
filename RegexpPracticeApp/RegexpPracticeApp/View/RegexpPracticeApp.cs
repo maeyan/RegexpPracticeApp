@@ -196,9 +196,7 @@ namespace RegexpPracticeApp {
                 } else {
                     MessageBox.Show("不正解");
                 }
-
             }
-
         }
 
         private void rtbResult_TextChanged(object sender, EventArgs e) {
@@ -232,15 +230,23 @@ namespace RegexpPracticeApp {
         private void lnkEntryProblem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
 
             //編集画面を開く
-            ProblemEditForm form = new ProblemEditForm();
-            form.StartPosition = FormStartPosition.Manual; //任意の位置に表示するため設定を変える
-            form.Location= new Point(this.Location.X + 25, this.Location.Y + 25); //25ずつオフセットした位置に出す
-            form.ShowDialog(this);
-            form.Show();
-            form.Dispose();
+            showEditForm();
+        }
 
+        private void showEditForm(string id = "") {
+            try {
+                ProblemEditForm form = new ProblemEditForm(id);
+                form.StartPosition = FormStartPosition.Manual; //任意の位置に表示するため設定を変える
+                form.Location = new Point(this.Location.X + 25, this.Location.Y + 25); //25ずつオフセットした位置に出す
+                form.ShowDialog(this);
+                form.Show();
+                form.Dispose();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
             vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem, this.dgvProblemList);
         }
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
             DataTable dataTable = new DataTable();
@@ -268,7 +274,7 @@ namespace RegexpPracticeApp {
                 }
                 
             } else if (dgv.Columns[e.ColumnIndex].Name == "編集") {
-
+                showEditForm(id);
             } else if (dgv.Columns[e.ColumnIndex].Name == "削除") {
                 try {
                     RegexpDB db = new RegexpDB();

@@ -11,10 +11,11 @@ using RegexpPracticeApp.View;
 namespace RegexpPracticeApp {
     public partial class ProblemEditForm : Form {
         RegexpForm regexpForm = null;
+        string _id = "";
 
-        public ProblemEditForm() {
+        public ProblemEditForm(string id) {
             InitializeComponent();
-
+            _id = id;
             UserInitialize();
         }
 
@@ -36,12 +37,24 @@ namespace RegexpPracticeApp {
 
             RegexpDB db = new RegexpDB();
             try {
-                db.InsertRegexpProblem(this.tbTitle.Text,
-                                       this.tbProblem.Text,
-                                       this.rtbResult.Text,
-                                       this.tbAnswer.Text,
-                                       int.Parse(this.tbLevel.Text),
-                                       regexpForm.lastMatchData);
+                if (_id == "") {
+                    db.InsertRegexpProblem(this.tbTitle.Text,
+                                           this.tbProblem.Text,
+                                           this.rtbResult.Text,
+                                           this.tbAnswer.Text,
+                                           int.Parse(this.tbLevel.Text),
+                                           regexpForm.lastMatchData);
+                } else {
+                    db.UpdateRegexpProblem(_id,
+                                           this.tbTitle.Text,
+                                           this.tbProblem.Text,
+                                           this.rtbResult.Text,
+                                           this.tbAnswer.Text,
+                                           int.Parse(this.tbLevel.Text),
+                                           regexpForm.lastMatchData);
+                }
+
+
             } catch(Exception ex){
                 MessageBox.Show(ex.Message);
                 return;
@@ -56,6 +69,21 @@ namespace RegexpPracticeApp {
         }
 
         public void UserInitialize() {
+            
+            //編集
+            if (_id != "") { 
+                lb_Title.Text = "編集画面";
+
+                RegexpDB db = new RegexpDB();
+
+                try {
+                    db.LoadData(_id, this.tbTitle, this.tbProblem, this.rtbResult, this.tbAnswer, this.tbLevel);
+                } catch (Exception ex) {
+                    this.Close();
+                    throw ex;
+                }
+            
+            }
 
             regexpForm = new RegexpForm(rtbResult, tbRegexp, ckIgnoreCase, ckMultiLine);
 
@@ -76,6 +104,24 @@ namespace RegexpPracticeApp {
 
         private void ckMultiLine_CheckedChanged(object sender, EventArgs e) {
             regexpForm.RichTextBoxColorReset();
+        }
+
+        private void btCancel_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void ProblemEditForm_Load(object sender, EventArgs e) {
+
+        }
+
+        private void bt_MouseLeave(object sender, EventArgs e) {
+            Button bt = (Button)sender;
+            bt.BackColor = Color.FromArgb(50, 165, 231);
+        }
+
+        private void bt_MouseEnter(object sender, EventArgs e) {
+            Button bt = (Button)sender;
+            bt.BackColor = Color.FromArgb(255, 99, 204);
         }
     }
 }
