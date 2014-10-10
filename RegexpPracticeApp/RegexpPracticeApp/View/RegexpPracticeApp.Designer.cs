@@ -25,6 +25,8 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexpPracticeApp));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconHome = new System.Windows.Forms.PictureBox();
             this.iconProblem = new System.Windows.Forms.PictureBox();
@@ -41,6 +43,7 @@
             this.lbUser = new System.Windows.Forms.Label();
             this.lbSystem = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lnkCloseProblemList = new System.Windows.Forms.LinkLabel();
             this.pnlModeSelect = new System.Windows.Forms.Panel();
             this.rbReplace = new System.Windows.Forms.RadioButton();
             this.rbSearch = new System.Windows.Forms.RadioButton();
@@ -50,6 +53,10 @@
             this.rtbAnnotation = new System.Windows.Forms.RichTextBox();
             this.ckIgnoreCase = new System.Windows.Forms.CheckBox();
             this.ckMultiLine = new System.Windows.Forms.CheckBox();
+            this.pnlProblem = new System.Windows.Forms.Panel();
+            this.lnkEntryProblem = new System.Windows.Forms.LinkLabel();
+            this.dgvProblemList = new System.Windows.Forms.DataGridView();
+            this.lnkSelectProblem = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).BeginInit();
@@ -57,6 +64,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).BeginInit();
             this.pnlModeSelect.SuspendLayout();
+            this.pnlProblem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -147,11 +156,12 @@
             // 
             // tbMessage
             // 
-            this.tbMessage.Location = new System.Drawing.Point(66, 12);
+            this.tbMessage.BackColor = System.Drawing.Color.White;
+            this.tbMessage.Location = new System.Drawing.Point(72, 28);
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ReadOnly = true;
-            this.tbMessage.Size = new System.Drawing.Size(504, 76);
+            this.tbMessage.Size = new System.Drawing.Size(504, 65);
             this.tbMessage.TabIndex = 2;
             // 
             // rtbProblem
@@ -159,9 +169,9 @@
             this.rtbProblem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.rtbProblem.ForeColor = System.Drawing.Color.DarkGray;
-            this.rtbProblem.Location = new System.Drawing.Point(351, 112);
+            this.rtbProblem.Location = new System.Drawing.Point(357, 117);
             this.rtbProblem.Name = "rtbProblem";
-            this.rtbProblem.Size = new System.Drawing.Size(271, 240);
+            this.rtbProblem.Size = new System.Drawing.Size(271, 235);
             this.rtbProblem.TabIndex = 4;
             this.rtbProblem.Text = "";
             // 
@@ -169,9 +179,9 @@
             // 
             this.rtbResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.rtbResult.Location = new System.Drawing.Point(66, 112);
+            this.rtbResult.Location = new System.Drawing.Point(72, 117);
             this.rtbResult.Name = "rtbResult";
-            this.rtbResult.Size = new System.Drawing.Size(271, 240);
+            this.rtbResult.Size = new System.Drawing.Size(271, 235);
             this.rtbResult.TabIndex = 5;
             this.rtbResult.Text = "";
             this.rtbResult.TextChanged += new System.EventHandler(this.rtbResult_TextChanged);
@@ -222,7 +232,7 @@
             // lbUser
             // 
             this.lbUser.AutoSize = true;
-            this.lbUser.Location = new System.Drawing.Point(66, 91);
+            this.lbUser.Location = new System.Drawing.Point(72, 96);
             this.lbUser.Name = "lbUser";
             this.lbUser.Size = new System.Drawing.Size(20, 18);
             this.lbUser.TabIndex = 11;
@@ -231,7 +241,7 @@
             // lbSystem
             // 
             this.lbSystem.AutoSize = true;
-            this.lbSystem.Location = new System.Drawing.Point(348, 91);
+            this.lbSystem.Location = new System.Drawing.Point(354, 96);
             this.lbSystem.Name = "lbSystem";
             this.lbSystem.Size = new System.Drawing.Size(20, 18);
             this.lbSystem.TabIndex = 12;
@@ -240,6 +250,21 @@
             // toolTip1
             // 
             this.toolTip1.AutomaticDelay = 100;
+            // 
+            // lnkCloseProblemList
+            // 
+            this.lnkCloseProblemList.AutoSize = true;
+            this.lnkCloseProblemList.Font = new System.Drawing.Font("メイリオ", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lnkCloseProblemList.LinkColor = System.Drawing.Color.White;
+            this.lnkCloseProblemList.Location = new System.Drawing.Point(8, -1);
+            this.lnkCloseProblemList.Name = "lnkCloseProblemList";
+            this.lnkCloseProblemList.Size = new System.Drawing.Size(28, 28);
+            this.lnkCloseProblemList.TabIndex = 2;
+            this.lnkCloseProblemList.TabStop = true;
+            this.lnkCloseProblemList.Text = "✖";
+            this.toolTip1.SetToolTip(this.lnkCloseProblemList, "閉じる");
+            this.lnkCloseProblemList.VisitedLinkColor = System.Drawing.Color.White;
+            this.lnkCloseProblemList.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCloseProblemList_LinkClicked);
             // 
             // pnlModeSelect
             // 
@@ -300,12 +325,13 @@
             this.btAnswer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(165)))), ((int)(((byte)(231)))));
             this.btAnswer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAnswer.ForeColor = System.Drawing.Color.White;
-            this.btAnswer.Location = new System.Drawing.Point(570, 12);
+            this.btAnswer.Location = new System.Drawing.Point(576, 28);
             this.btAnswer.Name = "btAnswer";
-            this.btAnswer.Size = new System.Drawing.Size(50, 76);
+            this.btAnswer.Size = new System.Drawing.Size(50, 65);
             this.btAnswer.TabIndex = 17;
             this.btAnswer.Text = "答え";
             this.btAnswer.UseVisualStyleBackColor = false;
+            this.btAnswer.Click += new System.EventHandler(this.btAnswer_Click);
             this.btAnswer.MouseEnter += new System.EventHandler(this.bt_MouseEnter);
             this.btAnswer.MouseLeave += new System.EventHandler(this.bt_MouseLeave);
             // 
@@ -344,12 +370,83 @@
             this.ckMultiLine.UseVisualStyleBackColor = true;
             this.ckMultiLine.CheckedChanged += new System.EventHandler(this.ckMultiLine_CheckedChanged);
             // 
+            // pnlProblem
+            // 
+            this.pnlProblem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlProblem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.pnlProblem.Controls.Add(this.lnkCloseProblemList);
+            this.pnlProblem.Controls.Add(this.lnkEntryProblem);
+            this.pnlProblem.Controls.Add(this.dgvProblemList);
+            this.pnlProblem.Location = new System.Drawing.Point(650, 0);
+            this.pnlProblem.Name = "pnlProblem";
+            this.pnlProblem.Size = new System.Drawing.Size(650, 488);
+            this.pnlProblem.TabIndex = 21;
+            // 
+            // lnkEntryProblem
+            // 
+            this.lnkEntryProblem.AutoSize = true;
+            this.lnkEntryProblem.Font = new System.Drawing.Font("メイリオ", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lnkEntryProblem.LinkColor = System.Drawing.Color.White;
+            this.lnkEntryProblem.Location = new System.Drawing.Point(463, 5);
+            this.lnkEntryProblem.Name = "lnkEntryProblem";
+            this.lnkEntryProblem.Size = new System.Drawing.Size(61, 20);
+            this.lnkEntryProblem.TabIndex = 1;
+            this.lnkEntryProblem.TabStop = true;
+            this.lnkEntryProblem.Text = "新規登録";
+            this.lnkEntryProblem.VisitedLinkColor = System.Drawing.Color.White;
+            this.lnkEntryProblem.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkEntryProblem_LinkClicked);
+            // 
+            // dgvProblemList
+            // 
+            this.dgvProblemList.AllowUserToAddRows = false;
+            this.dgvProblemList.AllowUserToDeleteRows = false;
+            this.dgvProblemList.AllowUserToResizeColumns = false;
+            this.dgvProblemList.AllowUserToResizeRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
+            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProblemList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvProblemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProblemList.Location = new System.Drawing.Point(49, 28);
+            this.dgvProblemList.MultiSelect = false;
+            this.dgvProblemList.Name = "dgvProblemList";
+            this.dgvProblemList.ReadOnly = true;
+            this.dgvProblemList.RowHeadersVisible = false;
+            this.dgvProblemList.RowTemplate.Height = 21;
+            this.dgvProblemList.Size = new System.Drawing.Size(475, 432);
+            this.dgvProblemList.TabIndex = 0;
+            this.dgvProblemList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProblemList_CellContentClick);
+            // 
+            // lnkSelectProblem
+            // 
+            this.lnkSelectProblem.AutoSize = true;
+            this.lnkSelectProblem.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(165)))), ((int)(((byte)(231)))));
+            this.lnkSelectProblem.Location = new System.Drawing.Point(69, 2);
+            this.lnkSelectProblem.Name = "lnkSelectProblem";
+            this.lnkSelectProblem.Size = new System.Drawing.Size(104, 18);
+            this.lnkSelectProblem.TabIndex = 22;
+            this.lnkSelectProblem.TabStop = true;
+            this.lnkSelectProblem.Text = "♯問題一覧を表示";
+            this.lnkSelectProblem.Visible = false;
+            this.lnkSelectProblem.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(165)))), ((int)(((byte)(231)))));
+            this.lnkSelectProblem.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelectProblem_LinkClicked);
+            // 
             // RegexpPracticeApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(634, 487);
+            this.Controls.Add(this.pnlProblem);
+            this.Controls.Add(this.lnkSelectProblem);
             this.Controls.Add(this.ckMultiLine);
             this.Controls.Add(this.ckIgnoreCase);
             this.Controls.Add(this.rtbAnnotation);
@@ -370,11 +467,11 @@
             this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(650, 500);
+            this.MinimumSize = new System.Drawing.Size(650, 525);
             this.Name = "RegexpPracticeApp";
             this.Text = "Regur Express Siren!";
             this.Activated += new System.EventHandler(this.RegexpPracticeApp_Activated);
-            this.Load += new System.EventHandler(this.RegexpPracticeAPp_Load);
+            this.Load += new System.EventHandler(this.RegexpPracticeApp_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();
@@ -383,6 +480,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).EndInit();
             this.pnlModeSelect.ResumeLayout(false);
             this.pnlModeSelect.PerformLayout();
+            this.pnlProblem.ResumeLayout(false);
+            this.pnlProblem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,6 +515,11 @@
         private System.Windows.Forms.RichTextBox rtbAnnotation;
         private System.Windows.Forms.CheckBox ckIgnoreCase;
         private System.Windows.Forms.CheckBox ckMultiLine;
+        private System.Windows.Forms.Panel pnlProblem;
+        private System.Windows.Forms.DataGridView dgvProblemList;
+        private System.Windows.Forms.LinkLabel lnkCloseProblemList;
+        private System.Windows.Forms.LinkLabel lnkEntryProblem;
+        private System.Windows.Forms.LinkLabel lnkSelectProblem;
     }
 }
 

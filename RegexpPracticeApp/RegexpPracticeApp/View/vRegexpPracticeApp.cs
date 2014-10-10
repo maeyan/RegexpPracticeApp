@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Resources;
 using System.Reflection;
+using System.Data.SQLite;
 
 namespace RegexpPracticeApp.View{
     class vRegexpPracticeApp {
@@ -72,6 +73,33 @@ namespace RegexpPracticeApp.View{
                 annotation.Select(23, 7);
                 annotation.SelectionBackColor = Color.FromArgb(58, 243, 47);
                 annotation.SelectionFont = new Font(annotation.SelectionFont, FontStyle.Bold);
+            }
+        }
+
+        public class Problem {
+
+            static public void ShowProblemPanel(Panel pnl, DataGridView dgvProblemList) {
+
+                //DataBaseからデータを読み込む
+                RegexpDB db = new RegexpDB();
+                db.LoadTitleList(dgvProblemList);
+
+                while (60 < pnl.Left) { //65 or
+                    pnl.Left -= 5;
+                    //System.Threading.Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+
+            }
+
+            static public void CloseProblemPanel(Panel pnl) {
+
+                while (pnl.Left<650) {
+                    pnl.Left += 5;
+                    //System.Threading.Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+
             }
         }
     }

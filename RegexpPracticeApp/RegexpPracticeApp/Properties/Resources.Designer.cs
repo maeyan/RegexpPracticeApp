@@ -60,6 +60,45 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
+        /// <summary>
+        ///   Regexp.db に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string dbName {
+            get {
+                return ResourceManager.GetString("dbName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   password に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string dbPassWord {
+            get {
+                return ResourceManager.GetString("dbPassWord", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dgv_delete {
+            get {
+                object obj = ResourceManager.GetObject("dgv_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dgv_edit {
+            get {
+                object obj = ResourceManager.GetObject("dgv_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap dgv_select {
+            get {
+                object obj = ResourceManager.GetObject("dgv_select", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap hover_export {
             get {
                 object obj = ResourceManager.GetObject("hover_export", resourceCulture);

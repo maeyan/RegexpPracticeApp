@@ -51,6 +51,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\..\..\TaskManager\TaskManager\dll\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RegexpDB.cs" />
+    <Compile Include="View\ProblemEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ProblemEditForm.Designer.cs">
+      <DependentUpon>ProblemEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegexpForm.cs" />
     <Compile Include="RegexpPracticeException.cs" />
     <Compile Include="View\RegexpPracticeApp.cs">
@@ -69,9 +79,13 @@
     <Compile Include="View\RegexpPracticeApp.Designer.cs">
       <DependentUpon>RegexpPracticeApp.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\vProblemEditForm.cs" />
     <Compile Include="View\vRegexpPracticeApp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\ProblemEditForm.resx">
+      <DependentUpon>ProblemEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RegexpPracticeApp.resx">
       <DependentUpon>RegexpPracticeApp.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +99,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -151,6 +166,9 @@
     <None Include="Resources\on_settings.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dgv_delete.png" />
+    <None Include="Resources\dgv_edit.png" />
+    <None Include="Resources\dgv_select.png" />
     <Content Include="Resources\hover_export.png" />
     <Content Include="Resources\hover_home.png" />
     <Content Include="Resources\hover_import.png" />

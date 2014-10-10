@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Resources;
 using System.Reflection;
 using RegexpPracticeApp.View;
+using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 namespace RegexpPracticeApp {
     public partial class RegexpPracticeApp : Form {
@@ -31,6 +33,7 @@ namespace RegexpPracticeApp {
             this.changeFreeMode();
 
             regexpForm = new RegexpForm(rtbResult, tbRegexp, tbReplace, ckIgnoreCase, ckMultiLine);
+
         }
 
         /// <summary>
@@ -58,8 +61,6 @@ namespace RegexpPracticeApp {
                 default:
                     break;
             }
-
-        
         }
 
 
@@ -73,9 +74,6 @@ namespace RegexpPracticeApp {
             bt.BackColor = Color.FromArgb(255, 99, 204);
         }
 
-        private void RegexpPracticeAPp_Load(object sender, EventArgs e) {
-
-        }
 
 
         /// <summary>
@@ -90,6 +88,9 @@ namespace RegexpPracticeApp {
             this.lbSystem.Text = "";
             this.lbReplace.Visible = true;
 
+            //LinkLabel
+            this.lnkSelectProblem.Visible = false;
+
             //Panel
             this.pnlModeSelect.Visible = true;
 
@@ -97,15 +98,14 @@ namespace RegexpPracticeApp {
             this.rbSearch.Checked = true;
 
             //RichTextBox
-            this.rtbProblem.Enabled = true;
             this.rtbProblem.Text = "";
             this.rtbProblem.ReadOnly = false;
-            this.rtbResult.Enabled = true;
             this.rtbResult.ReadOnly = false;
             this.rtbResult.Text = "";
             this.rtbResult.Width = 554;            
 
             //TextBox
+            this.tbMessage.Tag = "";
             this.tbMessage.Text = "自由入力モードです";
             this.tbMessage.Width = 554;
             this.tbRegexp.Focus();
@@ -128,19 +128,24 @@ namespace RegexpPracticeApp {
             this.lbSystem.Text = "■下記結果なる正規表現を書いてください";
             this.lbReplace.Visible = false;
 
+            //LinkLabel
+            this.lnkSelectProblem.Visible = true;
+
             //Panel
             this.pnlModeSelect.Visible = false;
 
             //RichTextBox
-            this.rtbProblem.Enabled = false;
+            //this.rtbProblem.Enabled = false;
             this.rtbProblem.Text = "";
             this.rtbProblem.ReadOnly = true;
-            this.rtbResult.Enabled = false;
+            this.rtbProblem.ForeColor = Color.Black;
             this.rtbResult.ReadOnly = true;
             this.rtbResult.Text = "";
             this.rtbResult.Width = 271;
+            this.rtbResult.ForeColor = Color.Black;
 
             //TextBox
+            this.tbMessage.Tag = "";
             this.tbMessage.Text = "問題を選択してください";
             this.tbMessage.Width = 504;
             this.tbRegexp.Text = "";
@@ -172,11 +177,25 @@ namespace RegexpPracticeApp {
         }
 
         private void btExecute_Click(object sender, EventArgs e) {
+            
             if(this.rbSearch.Checked){
                 regexpForm.execMatch();
             
             }else if(this.rbReplace.Checked){
                 regexpForm.execReplace();
+            }
+
+            //出題モードの時は、あってたかどうか判定する
+            if (vRegexpPracticeApp.SwitchIcon.ActivePictureBox.Name == "iconProblem") {
+                string id = (string)this.tbMessage.Tag;
+                MatchCollection lastMatchData = regexpForm.lastMatchData;
+                RegexpDB db = new RegexpDB();
+                if (db.isMatchData(id, lastMatchData)) {
+                    MessageBox.Show("正解");
+
+                } else {
+                    MessageBox.Show("不正解");
+                }
             }
         }
 
@@ -198,6 +217,90 @@ namespace RegexpPracticeApp {
 
         private void ckMultiLine_CheckedChanged(object sender, EventArgs e) {
             regexpForm.RichTextBoxColorReset();
+        }
+
+        private void lnkSelectProblem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem, this.dgvProblemList);
+        }
+
+        private void lnkCloseProblemList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            vRegexpPracticeApp.Problem.CloseProblemPanel(this.pnlProblem);
+        }
+
+        private void lnkEntryProblem_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+
+            //編集画面を開く
+            showEditForm();
+        }
+
+        private void showEditForm(string id = "") {
+            try {
+                ProblemEditForm form = new ProblemEditForm(id);
+                form.StartPosition = FormStartPosition.Manual; //任意の位置に表示するため設定を変える
+                form.Location = new Point(this.Location.X + 25, this.Location.Y + 25); //25ずつオフセットした位置に出す
+                form.ShowDialog(this);
+                form.Show();
+                form.Dispose();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+            vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem, this.dgvProblemList);
+        }
+
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
+            DataTable dataTable = new DataTable();
+            using (SQLiteConnection con = new SQLiteConnection("Data Source=Test.db")) {
+                using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT [ROWID], [ユーザ名], [組織名] FROM Sample", con)) {
+                    //using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT id, level, title FROM problemList", con)) {
+                    adapter.Fill(dataTable);
+                }
+            }
+        }
+
+        private void dgvProblemList_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            DataGridView dgv = (DataGridView)sender;
+
+            string id = dgv.CurrentRow.Cells[1].Value.ToString();
+
+            if (dgv.Columns[e.ColumnIndex].Name == "選択") {
+                RegexpDB db = new RegexpDB();
+                try {
+                    db.SelectProblemList(id, this.tbMessage, this.rtbResult, this.rtbProblem);
+                    vRegexpPracticeApp.Problem.CloseProblemPanel(this.pnlProblem);
+                }catch(Exception ex){
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                
+            } else if (dgv.Columns[e.ColumnIndex].Name == "編集") {
+                showEditForm(id);
+            } else if (dgv.Columns[e.ColumnIndex].Name == "削除") {
+                try {
+                    RegexpDB db = new RegexpDB();
+                    db.DeleteProblemList(id);         //削除
+                    db.LoadTitleList(dgvProblemList); //更新
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+        }
+
+        private void RegexpPracticeApp_Load(object sender, EventArgs e) {
+
+        }
+
+        private void btAnswer_Click(object sender, EventArgs e) {
+
+            string id = (string)this.tbMessage.Tag;
+            try {
+                RegexpDB db = new RegexpDB();
+                db.SelectAnswerFromProblemList(id, this.tbMessage);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                return;
+            }
         }
     }
 }
