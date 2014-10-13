@@ -30,7 +30,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconHome = new System.Windows.Forms.PictureBox();
             this.iconProblem = new System.Windows.Forms.PictureBox();
-            this.iconSettings = new System.Windows.Forms.PictureBox();
             this.iconImport = new System.Windows.Forms.PictureBox();
             this.iconExport = new System.Windows.Forms.PictureBox();
             this.tbMessage = new System.Windows.Forms.TextBox();
@@ -60,7 +59,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).BeginInit();
             this.pnlModeSelect.SuspendLayout();
@@ -75,7 +73,6 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.panel1.Controls.Add(this.iconHome);
             this.panel1.Controls.Add(this.iconProblem);
-            this.panel1.Controls.Add(this.iconSettings);
             this.panel1.Controls.Add(this.iconImport);
             this.panel1.Controls.Add(this.iconExport);
             this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
@@ -111,20 +108,6 @@
             this.iconProblem.Click += new System.EventHandler(this.iconChange_Click);
             this.iconProblem.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
             this.iconProblem.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconSettings
-            // 
-            this.iconSettings.Image = ((System.Drawing.Image)(resources.GetObject("iconSettings.Image")));
-            this.iconSettings.Location = new System.Drawing.Point(12, 212);
-            this.iconSettings.Name = "iconSettings";
-            this.iconSettings.Size = new System.Drawing.Size(37, 37);
-            this.iconSettings.TabIndex = 4;
-            this.iconSettings.TabStop = false;
-            this.iconSettings.Tag = "settings";
-            this.toolTip1.SetToolTip(this.iconSettings, "設定");
-            this.iconSettings.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconSettings.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconSettings.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
             // 
             // iconImport
             // 
@@ -476,7 +459,6 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).EndInit();
             this.pnlModeSelect.ResumeLayout(false);
@@ -496,7 +478,6 @@
         private System.Windows.Forms.PictureBox iconExport;
         private System.Windows.Forms.PictureBox iconHome;
         private System.Windows.Forms.PictureBox iconProblem;
-        private System.Windows.Forms.PictureBox iconSettings;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.RichTextBox rtbProblem;
         private System.Windows.Forms.RichTextBox rtbResult;
