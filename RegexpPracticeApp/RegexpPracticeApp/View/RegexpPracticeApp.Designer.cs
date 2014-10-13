@@ -25,12 +25,11 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexpPracticeApp));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconHome = new System.Windows.Forms.PictureBox();
             this.iconProblem = new System.Windows.Forms.PictureBox();
-            this.iconSettings = new System.Windows.Forms.PictureBox();
             this.iconImport = new System.Windows.Forms.PictureBox();
             this.iconExport = new System.Windows.Forms.PictureBox();
             this.tbMessage = new System.Windows.Forms.TextBox();
@@ -60,7 +59,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).BeginInit();
             this.pnlModeSelect.SuspendLayout();
@@ -75,7 +73,6 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.panel1.Controls.Add(this.iconHome);
             this.panel1.Controls.Add(this.iconProblem);
-            this.panel1.Controls.Add(this.iconSettings);
             this.panel1.Controls.Add(this.iconImport);
             this.panel1.Controls.Add(this.iconExport);
             this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
@@ -112,20 +109,6 @@
             this.iconProblem.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
             this.iconProblem.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
             // 
-            // iconSettings
-            // 
-            this.iconSettings.Image = ((System.Drawing.Image)(resources.GetObject("iconSettings.Image")));
-            this.iconSettings.Location = new System.Drawing.Point(12, 212);
-            this.iconSettings.Name = "iconSettings";
-            this.iconSettings.Size = new System.Drawing.Size(37, 37);
-            this.iconSettings.TabIndex = 4;
-            this.iconSettings.TabStop = false;
-            this.iconSettings.Tag = "settings";
-            this.toolTip1.SetToolTip(this.iconSettings, "設定");
-            this.iconSettings.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconSettings.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconSettings.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
             // iconImport
             // 
             this.iconImport.Image = ((System.Drawing.Image)(resources.GetObject("iconImport.Image")));
@@ -161,6 +144,7 @@
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ReadOnly = true;
+            this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbMessage.Size = new System.Drawing.Size(504, 65);
             this.tbMessage.TabIndex = 2;
             // 
@@ -403,17 +387,17 @@
             this.dgvProblemList.AllowUserToDeleteRows = false;
             this.dgvProblemList.AllowUserToResizeColumns = false;
             this.dgvProblemList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
-            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
+            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProblemList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProblemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProblemList.Location = new System.Drawing.Point(49, 28);
             this.dgvProblemList.MultiSelect = false;
@@ -475,7 +459,6 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconImport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconExport)).EndInit();
             this.pnlModeSelect.ResumeLayout(false);
@@ -495,7 +478,6 @@
         private System.Windows.Forms.PictureBox iconExport;
         private System.Windows.Forms.PictureBox iconHome;
         private System.Windows.Forms.PictureBox iconProblem;
-        private System.Windows.Forms.PictureBox iconSettings;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.RichTextBox rtbProblem;
         private System.Windows.Forms.RichTextBox rtbResult;
