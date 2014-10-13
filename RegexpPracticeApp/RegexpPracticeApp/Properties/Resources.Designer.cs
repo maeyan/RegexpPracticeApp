@@ -127,13 +127,6 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap hover_settings {
-            get {
-                object obj = ResourceManager.GetObject("hover_settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap off_export {
             get {
                 object obj = ResourceManager.GetObject("off_export", resourceCulture);
@@ -162,13 +155,6 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap off_settings {
-            get {
-                object obj = ResourceManager.GetObject("off_settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap on_export {
             get {
                 object obj = ResourceManager.GetObject("on_export", resourceCulture);
@@ -193,13 +179,6 @@ namespace RegexpPracticeApp.Properties {
         internal static System.Drawing.Bitmap on_problem {
             get {
                 object obj = ResourceManager.GetObject("on_problem", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap on_settings {
-            get {
-                object obj = ResourceManager.GetObject("on_settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
