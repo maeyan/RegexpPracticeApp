@@ -11,8 +11,6 @@ using System.Reflection;
 
 namespace RegexpPracticeApp{
     class RegexpDB : IDisposable{
-        const int ALL_MATCH = 1;
-        const int GROUP_MATCH = 2;
         private SQLiteConnection con = null;
         private DataTable dataTable = null;
 
@@ -69,7 +67,7 @@ namespace RegexpPracticeApp{
 
             //DBからマッチ情報を取得する
             using (SQLiteCommand cmd = con.CreateCommand()) {
-                string sql = "SELECT [type], [matchIndex], [matchLength] FROM [matchData] WHERE [problem_id] = @id ORDER BY [ROWID];";
+                string sql = "SELECT [matchIndex], [matchLength] FROM [matchData] WHERE [problem_id] = @id ORDER BY [ROWID];";
                 cmd.CommandText = sql;
 
                 cmd.Parameters.Add("id", System.Data.DbType.Int32);
@@ -79,7 +77,7 @@ namespace RegexpPracticeApp{
                 List<int[]> rightData = new List<int[]>();
                 using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                     while (reader.Read()) {
-                        rightData.Add(new int[] { Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2]) });
+                        rightData.Add(new int[] { Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]) });
                     }
                 }
 
@@ -95,25 +93,11 @@ namespace RegexpPracticeApp{
                     if (rightData.Count < count) {
                         //DBの方がデータがすくない時間違い
                         return false;
-                    } else if (rightData[count - 1][0] != ALL_MATCH || rightData[count - 1][1] != index || rightData[count - 1][2] != length) {
+                    } else if ( rightData[count - 1][0] != index || rightData[count - 1][1] != length) {
                         //データが一致しないので間違い
                         return false;
                     }
 
-                    for (int i = 1; i < match.Groups.Count; i++) {
-                        count++;
-                        index = match.Groups[i].Index;
-                        length = match.Groups[i].Length;
-
-                        //判定
-                        if (rightData.Count < count) {
-                            //DBの方がデータがすくない時間違い
-                            return false;
-                        } else if (rightData[count - 1][0] != GROUP_MATCH || rightData[count - 1][1] != index || rightData[count - 1][2] != length) {
-                            //データが一致しないので間違い
-                            return false;
-                        }
-                    }
                 }
 
                 //DBにあるデータの方が多い時は、データが一致しないので間違い
@@ -147,7 +131,7 @@ namespace RegexpPracticeApp{
                             }
                         }
 
-                        sql = "SELECT [type], [matchIndex], [matchLength] FROM [matchData] WHERE [problem_id] = @problemId;";
+                        sql = "SELECT [matchIndex], [matchLength] FROM [matchData] WHERE [problem_id] = @problemId;";
                         cmd.CommandText = sql;
 
                         cmd.Parameters.Add("problemId", System.Data.DbType.Int32);
@@ -163,27 +147,13 @@ namespace RegexpPracticeApp{
                         using (SQLiteDataReader reader = cmd.ExecuteReader()) {
                             while (reader.Read()) {
                                 
-                                int index = Convert.ToInt32(reader[1]);
-                                int length = Convert.ToInt32(reader[2]);
-                                if (RegexpDB.ALL_MATCH == Convert.ToInt32(reader[0])) {
-                                    //全体マッチ
-                                    rtbProblem.Select(index, length);
-                                    rtbProblem.SelectionBackColor = Color.FromArgb(58, 243, 47);
+                                int index = Convert.ToInt32(reader[0]);
+                                int length = Convert.ToInt32(reader[1]);
+
+                                //全体マッチ
+                                rtbProblem.Select(index, length);
+                                rtbProblem.SelectionBackColor = Color.FromArgb(58, 243, 47);
                                 
-                                } else if (RegexpDB.GROUP_MATCH == Convert.ToInt32(reader[0])) {
-                                    //部分マッチ
-                                    rtbProblem.Select(index, length);
-                                    rtbProblem.SelectionFont = new Font(rtbProblem.SelectionFont, FontStyle.Bold);
-
-                                } else {
-                                    string className = this.GetType().FullName;
-                                    string methodName = MethodBase.GetCurrentMethod().Name;
-                                    string errorMessage = "[Class]：" + className + "\n" +
-                                                          "[Method]：" + methodName + "\n" +
-                                                          "typeの値が不正です";
-                                    throw new RegexpPracticeException(errorMessage);
-
-                                }
                             }
                         }
 
@@ -344,16 +314,7 @@ namespace RegexpPracticeApp{
                         int length = match.Groups[0].Length;
 
                         //matchDataテーブルに追加(全体マッチ)
-                        this.InsertMatchDataTable(cmd, problem_id, ALL_MATCH, index, length);
-
-                        for (int i = 1; i < match.Groups.Count; i++) {
-                            //部分マッチ
-                            index = match.Groups[i].Index;
-                            length = match.Groups[i].Length;
-
-                            //matchDataテーブルに追加(グループマッチ)
-                            this.InsertMatchDataTable(cmd, problem_id, GROUP_MATCH, index, length);
-                        }
+                        this.InsertMatchDataTable(cmd, problem_id, index, length);
                     }
 
                 } catch (Exception ex) {
@@ -423,16 +384,7 @@ namespace RegexpPracticeApp{
                             int length = match.Groups[0].Length;
 
                             //matchDataテーブルに追加(全体マッチ)
-                            this.InsertMatchDataTable(cmd, problem_id, ALL_MATCH, index, length);
-
-                            for (int i = 1; i < match.Groups.Count; i++) {
-                                //部分マッチ
-                                index = match.Groups[i].Index;
-                                length = match.Groups[i].Length;
-
-                                //matchDataテーブルに追加(グループマッチ)
-                                this.InsertMatchDataTable(cmd, problem_id, GROUP_MATCH, index, length);
-                            }
+                            this.InsertMatchDataTable(cmd, problem_id, index, length);
                         }
                     }
 
@@ -443,19 +395,16 @@ namespace RegexpPracticeApp{
             }
         }
 
-        private void InsertMatchDataTable(SQLiteCommand cmd, int problem_id, int type, int matchIndex, int matchLength) {
+        private void InsertMatchDataTable(SQLiteCommand cmd, int problem_id, int matchIndex, int matchLength) {
             
             string sql = "INSERT INTO [matchData] " +
-                           "(problem_id, type, matchIndex, matchLength) " +
-                           "VALUES(@problem_id, @type, @matchIndex, @matchLength);";
+                           "(problem_id, matchIndex, matchLength) " +
+                           "VALUES(@problem_id, @matchIndex, @matchLength);";
 
             cmd.CommandText = sql;
 
             cmd.Parameters.Add("problem_id", System.Data.DbType.Int32);
             cmd.Parameters["problem_id"].Value = problem_id;
-
-            cmd.Parameters.Add("type", System.Data.DbType.Int32);
-            cmd.Parameters["type"].Value = type;
 
             cmd.Parameters.Add("matchIndex", System.Data.DbType.Int32);
             cmd.Parameters["matchIndex"].Value = matchIndex;
