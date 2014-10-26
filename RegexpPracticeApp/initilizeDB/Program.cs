@@ -20,20 +20,8 @@ namespace initilizeDB {
 
                 using (SQLiteTransaction trans = con.BeginTransaction()) {
 
-
-                    //[mst_match]tableの作成
-                    string sql = "CREATE TABLE [mst_match] (" +
-                                   "[id]   INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                   "[item] TEXT    NOT NULL UNIQUE" +
-                                 ");";
-                    using (SQLiteCommand cmd = con.CreateCommand()) {
-                        cmd.CommandText = sql;
-                        cmd.ExecuteNonQuery();
-                    }
-
-
                     //[problem]tableの作成
-                    sql = "CREATE TABLE [problemList] (" +
+                    string sql = "CREATE TABLE [problemList] (" +
                             "[id]      INTEGER      PRIMARY KEY AUTOINCREMENT," +
                             "[title]   VARCHAR(50)  NOT NULL," +
                             "[problem] VARCHAR(500) NOT NULL," +
@@ -52,24 +40,12 @@ namespace initilizeDB {
                     //[matchData]tableの作成
                     sql = "CREATE TABLE [matchData] (" +
                             "[problem_id]  INTEGER NOT NULL REFERENCES [problemList]([id]) ON DELETE CASCADE," +
-                            "[type]        INTEGER NOT NULL REFERENCES [mst_match]([id])," +
                             "[matchIndex]  INTEGER NOT NULL," +
                             "[matchLength] INTEGER NOT NULL" +
                           ");";
                     using (SQLiteCommand cmd = con.CreateCommand()) {
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
-                    }
-
-                    string[] items = new string[]{"全体にマッチ", "カッコ内にマッチ"};
-                    foreach (string item in items){
-                        sql ="INSERT INTO [mst_match] ([item]) VALUES(@item);";
-                        using (SQLiteCommand cmd = con.CreateCommand()) {
-                            cmd.CommandText = sql;
-                            cmd.Parameters.Add("item", System.Data.DbType.String);
-                            cmd.Parameters["item"].Value = item;
-                            cmd.ExecuteNonQuery();
-                        }
                     }
                     
                     trans.Commit();

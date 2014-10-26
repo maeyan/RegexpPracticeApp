@@ -20,7 +20,7 @@ namespace RegexpPracticeApp {
         }
 
         private void btExecute_Click(object sender, EventArgs e) {
-            regexpForm.execMatch();
+            regexpForm.execMatch(false);
         }
 
         private void btRegistry_Click(object sender, EventArgs e) {
@@ -87,11 +87,11 @@ namespace RegexpPracticeApp {
 
             regexpForm = new RegexpForm(rtbResult, tbRegexp, ckIgnoreCase, ckMultiLine);
 
-            vRegexpPracticeApp.Form.SetAnnotation(rtbAnnotation);
+            vRegexpPracticeApp.Form.SetAnnotationProblem(rtbAnnotation);
         }
 
         private void rtbResult_TextChanged(object sender, EventArgs e) {
-            if (this.rtbResult.Focused) { regexpForm.execMatch(); }
+            if (this.rtbResult.Focused) { regexpForm.execMatch(true); }
         }
 
         private void tbRegexp_TextChanged(object sender, EventArgs e) {
@@ -110,10 +110,6 @@ namespace RegexpPracticeApp {
             this.Close();
         }
 
-        private void ProblemEditForm_Load(object sender, EventArgs e) {
-
-        }
-
         private void bt_MouseLeave(object sender, EventArgs e) {
             Button bt = (Button)sender;
             bt.BackColor = Color.FromArgb(50, 165, 231);
@@ -122,6 +118,12 @@ namespace RegexpPracticeApp {
         private void bt_MouseEnter(object sender, EventArgs e) {
             Button bt = (Button)sender;
             bt.BackColor = Color.FromArgb(255, 99, 204);
+        }
+
+        private void tbRegexp_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                regexpForm.execMatch(false);
+            }
         }
     }
 }

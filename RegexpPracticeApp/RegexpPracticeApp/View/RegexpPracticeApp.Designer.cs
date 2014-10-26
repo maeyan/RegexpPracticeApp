@@ -290,14 +290,15 @@
             // 
             this.rtbAnnotation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.rtbAnnotation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.rtbAnnotation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbAnnotation.Font = new System.Drawing.Font("メイリオ", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rtbAnnotation.Location = new System.Drawing.Point(280, 361);
+            this.rtbAnnotation.Location = new System.Drawing.Point(357, 361);
             this.rtbAnnotation.Name = "rtbAnnotation";
             this.rtbAnnotation.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtbAnnotation.Size = new System.Drawing.Size(342, 29);
+            this.rtbAnnotation.Size = new System.Drawing.Size(265, 51);
             this.rtbAnnotation.TabIndex = 18;
-            this.rtbAnnotation.Text = "※正規表現全体に一致⇒緑背景色／カッコに一致⇒緑背景色＋太字";
+            this.rtbAnnotation.Text = ".";
             // 
             // ckIgnoreCase
             // 
@@ -422,7 +423,6 @@
             this.Name = "RegexpPracticeApp";
             this.Text = "Regur Express Siren!";
             this.Activated += new System.EventHandler(this.RegexpPracticeApp_Activated);
-            this.Load += new System.EventHandler(this.RegexpPracticeApp_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();

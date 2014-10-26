@@ -146,6 +146,7 @@
             this.tbRegexp.TabIndex = 4;
             this.toolTip1.SetToolTip(this.tbRegexp, "問題の答えとなる正規表現を入力してください(DBには登録されません)");
             this.tbRegexp.TextChanged += new System.EventHandler(this.tbRegexp_TextChanged);
+            this.tbRegexp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbRegexp_KeyDown);
             // 
             // panel1
             // 
@@ -335,7 +336,7 @@
             this.rtbAnnotation.Location = new System.Drawing.Point(91, 339);
             this.rtbAnnotation.Name = "rtbAnnotation";
             this.rtbAnnotation.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtbAnnotation.Size = new System.Drawing.Size(414, 22);
+            this.rtbAnnotation.Size = new System.Drawing.Size(574, 22);
             this.rtbAnnotation.TabIndex = 34;
             this.rtbAnnotation.Text = "※正規表現全体に一致⇒緑背景色／カッコに一致⇒緑背景色＋太字";
             // 
@@ -386,7 +387,6 @@
             this.Name = "ProblemEditForm";
             this.Text = "ProblemEditForm";
             this.Activated += new System.EventHandler(this.ProblemEditForm_Activated);
-            this.Load += new System.EventHandler(this.ProblemEditForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
