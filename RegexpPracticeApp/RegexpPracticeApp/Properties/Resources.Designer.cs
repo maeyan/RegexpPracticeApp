@@ -99,23 +99,9 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap hover_export {
-            get {
-                object obj = ResourceManager.GetObject("hover_export", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap hover_home {
             get {
                 object obj = ResourceManager.GetObject("hover_home", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap hover_import {
-            get {
-                object obj = ResourceManager.GetObject("hover_import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -127,23 +113,9 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap off_export {
-            get {
-                object obj = ResourceManager.GetObject("off_export", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap off_home {
             get {
                 object obj = ResourceManager.GetObject("off_home", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap off_import {
-            get {
-                object obj = ResourceManager.GetObject("off_import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -155,23 +127,9 @@ namespace RegexpPracticeApp.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap on_export {
-            get {
-                object obj = ResourceManager.GetObject("on_export", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap on_home {
             get {
                 object obj = ResourceManager.GetObject("on_home", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap on_import {
-            get {
-                object obj = ResourceManager.GetObject("on_import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

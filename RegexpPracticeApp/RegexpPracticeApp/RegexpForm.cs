@@ -57,6 +57,9 @@ namespace RegexpPracticeApp {
             
             RichTextBoxColorReset();
 
+            //初期化
+            _lastMatchData = null;
+
             //textbox or 正規表現が空文字の時何もせず終了とする
             if (_rtbInputString.Text == "" || _tbRegexp.Text == "") { return; }
 

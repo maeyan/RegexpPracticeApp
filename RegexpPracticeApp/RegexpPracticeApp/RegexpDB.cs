@@ -278,7 +278,7 @@ namespace RegexpPracticeApp{
 
 
             dgvProblemList.DataSource = dataTable;
-            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT id, level AS [難易度], title AS [タイトル] FROM problemList", con)) {
+            using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT id, level AS [難易度], title AS [タイトル] FROM problemList ORDER BY [難易度]", con)) {
                 adapter.Fill(dataTable);
             }
 
