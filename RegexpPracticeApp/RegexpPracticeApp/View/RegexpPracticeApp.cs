@@ -27,8 +27,6 @@ namespace RegexpPracticeApp {
             //デフォルトでアイコンがオンの物を記憶さておく
             vRegexpPracticeApp.SwitchIcon.ActivePictureBox = this.iconHome;
 
-            vRegexpPracticeApp.Form.SetAnnotation(rtbAnnotation);
-
             //デフォルトの表示
             this.changeFreeMode();
 
@@ -112,7 +110,9 @@ namespace RegexpPracticeApp {
             this.tbRegexp.Text = "";
             this.tbReplace.Text = "";
             this.tbReplace.Visible = true;
-            
+
+            //フリーモードの注意書きにする
+            vRegexpPracticeApp.Form.SetAnnotationFreeMode(rtbAnnotation);
         }
 
 
@@ -182,7 +182,7 @@ namespace RegexpPracticeApp {
 
         private void RexexpExecute(){
             if(this.rbSearch.Checked){
-                regexpForm.execMatch();
+                regexpForm.execMatch(true);
             
             }else if(this.rbReplace.Checked){
                 regexpForm.execReplace();
@@ -205,7 +205,7 @@ namespace RegexpPracticeApp {
         private void rtbResult_TextChanged(object sender, EventArgs e) {
 
             if (rtbResult.Focused) {
-                regexpForm.execMatch();
+                regexpForm.execMatch(true);
             }
 
         }
@@ -289,10 +289,6 @@ namespace RegexpPracticeApp {
                     return;
                 }
             }
-        }
-
-        private void RegexpPracticeApp_Load(object sender, EventArgs e) {
-
         }
 
         private void btAnswer_Click(object sender, EventArgs e) {

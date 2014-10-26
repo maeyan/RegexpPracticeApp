@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace RegexpPracticeApp {
     class RegexpForm {
+        public static Color BG_PINK = Color.FromArgb(255, 182, 193);
+        public static Color BG_BLUE = Color.FromArgb(173, 216, 230);
+
         private CheckBox _ckIgnoreCase = null;
         private CheckBox _ckMultiLine = null;
         private RichTextBox _rtbInputString = null;
@@ -53,7 +56,7 @@ namespace RegexpPracticeApp {
             _rtbInputString.SelectionStart = selectPos;
         }
 
-        public void execMatch() {
+        public void execMatch(bool GroupMatchFlag) {
             
             RichTextBoxColorReset();
 
@@ -67,18 +70,26 @@ namespace RegexpPracticeApp {
             _rtbInputString.Select(selectPos, 0);
 
             try {
+                Color CurrentColor = BG_BLUE;
                 _lastMatchData = Regex.Matches(_rtbInputString.Text, _tbRegexp.Text, this.getOption());
                 foreach (Match match in _lastMatchData) {
                     //全体マッチ
                     _rtbInputString.Select(match.Groups[0].Index, match.Groups[0].Length);
-                    _rtbInputString.SelectionBackColor = Color.FromArgb(58, 243, 47);
-
-                    for (int i = 1; i < match.Groups.Count; i++) {
-                        //部分マッチ
-                        _rtbInputString.Select(match.Groups[i].Index, match.Groups[i].Length);
-                        _rtbInputString.SelectionFont = new Font(_rtbInputString.SelectionFont, FontStyle.Bold);
+                    if (CurrentColor == BG_PINK) {
+                        _rtbInputString.SelectionBackColor = BG_BLUE;
+                        CurrentColor = BG_BLUE;
+                    } else {
+                        _rtbInputString.SelectionBackColor = BG_PINK;
+                        CurrentColor = BG_PINK;
                     }
 
+                    if (GroupMatchFlag) {
+                        for (int i = 1; i < match.Groups.Count; i++) {
+                            //部分マッチ
+                            _rtbInputString.Select(match.Groups[i].Index, match.Groups[i].Length);
+                            _rtbInputString.SelectionFont = new Font(_rtbInputString.SelectionFont, FontStyle.Underline);
+                        }
+                    }
                 }
             }catch{
             } finally {
@@ -130,7 +141,7 @@ namespace RegexpPracticeApp {
                     for (int i = 1; i < match.Groups.Count; i++) {
                         //部分マッチ
                         _rtbInputString.Select(match.Groups[i].Index, match.Groups[i].Length);
-                        _rtbInputString.SelectionFont = new Font(_rtbInputString.SelectionFont, FontStyle.Bold);
+                        _rtbInputString.SelectionFont = new Font(_rtbInputString.SelectionFont, FontStyle.Underline);
                     }
                     ret = true;
                 }                

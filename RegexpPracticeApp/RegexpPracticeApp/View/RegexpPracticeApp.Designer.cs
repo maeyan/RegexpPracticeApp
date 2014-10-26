@@ -25,8 +25,8 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegexpPracticeApp));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconHome = new System.Windows.Forms.PictureBox();
             this.iconProblem = new System.Windows.Forms.PictureBox();
@@ -290,14 +290,15 @@
             // 
             this.rtbAnnotation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.rtbAnnotation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.rtbAnnotation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbAnnotation.Font = new System.Drawing.Font("メイリオ", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rtbAnnotation.Location = new System.Drawing.Point(280, 361);
+            this.rtbAnnotation.Location = new System.Drawing.Point(357, 361);
             this.rtbAnnotation.Name = "rtbAnnotation";
             this.rtbAnnotation.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtbAnnotation.Size = new System.Drawing.Size(342, 29);
+            this.rtbAnnotation.Size = new System.Drawing.Size(265, 51);
             this.rtbAnnotation.TabIndex = 18;
-            this.rtbAnnotation.Text = "※正規表現全体に一致⇒緑背景色／カッコに一致⇒緑背景色＋太字";
+            this.rtbAnnotation.Text = ".";
             // 
             // ckIgnoreCase
             // 
@@ -354,17 +355,17 @@
             this.dgvProblemList.AllowUserToDeleteRows = false;
             this.dgvProblemList.AllowUserToResizeColumns = false;
             this.dgvProblemList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
-            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(242)))), ((int)(((byte)(248)))));
+            this.dgvProblemList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvProblemList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProblemList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvProblemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProblemList.Location = new System.Drawing.Point(49, 28);
             this.dgvProblemList.MultiSelect = false;
@@ -422,7 +423,6 @@
             this.Name = "RegexpPracticeApp";
             this.Text = "Regur Express Siren!";
             this.Activated += new System.EventHandler(this.RegexpPracticeApp_Activated);
-            this.Load += new System.EventHandler(this.RegexpPracticeApp_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();

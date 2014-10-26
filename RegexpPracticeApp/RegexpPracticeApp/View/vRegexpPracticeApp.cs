@@ -67,12 +67,25 @@ namespace RegexpPracticeApp.View{
         }
 
         public class Form {
-            static public void SetAnnotation(RichTextBox annotation) {
+            static public void SetAnnotationFreeMode(RichTextBox annotation) {
+                
+                annotation.Text = "※正規表現全体に一致⇒緑背背景,水色景色\n" + 
+                                  "　カッコに一致⇒下線";
                 annotation.Select(11, 4);
-                annotation.SelectionBackColor = Color.FromArgb(58, 243, 47);
-                annotation.Select(23, 7);
-                annotation.SelectionBackColor = Color.FromArgb(58, 243, 47);
-                annotation.SelectionFont = new Font(annotation.SelectionFont, FontStyle.Bold);
+                annotation.SelectionBackColor = RegexpForm.BG_PINK;
+                annotation.Select(16, 4);
+                annotation.SelectionBackColor = RegexpForm.BG_BLUE;
+                
+                annotation.Select(29, 3);
+                annotation.SelectionFont = new Font(annotation.SelectionFont, FontStyle.Underline);
+            }
+
+            static public void SetAnnotationProblem(RichTextBox annotation) {
+                annotation.Text = "※正規表現全体に一致⇒緑色背景,水色景色。正規表現問題ではグループマッチは正解判定対象外";
+                annotation.Select(11, 4);
+                annotation.SelectionBackColor = RegexpForm.BG_PINK;
+                annotation.Select(16, 4);
+                annotation.SelectionBackColor = RegexpForm.BG_BLUE;
             }
         }
 
