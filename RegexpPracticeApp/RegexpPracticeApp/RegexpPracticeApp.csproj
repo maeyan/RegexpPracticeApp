@@ -133,25 +133,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\off_export.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\off_home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\off_import.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\off_problem.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\on_export.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\on_home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\on_import.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\on_problem.png" />
@@ -160,13 +148,8 @@
     <None Include="Resources\dgv_delete.png" />
     <None Include="Resources\dgv_edit.png" />
     <None Include="Resources\dgv_select.png" />
-    <Content Include="Resources\hover_export.png" />
     <Content Include="Resources\hover_home.png" />
-    <Content Include="Resources\hover_import.png" />
-    <Content Include="Resources\hover_pencil.png" />
     <Content Include="Resources\hover_problem.png" />
-    <Content Include="Resources\off_pencil.png" />
-    <Content Include="Resources\on_pencil.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

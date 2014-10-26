@@ -143,31 +143,7 @@
         iSD8ADBbhRYUs5/pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="iconImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAIAAABK/LdUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAFRSURBVFhH7dSxqoJQHMfx+zA25ORsg5PS4tYQ3CEIwcEH
-        cBPaewF3H6DJyTVwa2xoCqJwUJxEUOn+uffXpdCTx5C4cP1M5vH8v3CUPoT3Gnr9+sM93/evjzzPwxq3
-        ofdr6HH4tz3HcShw73K5oHNzPB6xdrNcLrGfgdmTJGm/32MwH+qNRiPsZ3h2npPJ5Hw+Y1ibMAxFUcRO
-        tpb3N51O0zTFSDY6CToP7Hmq/XuZz+d5nmNwk9PpJMsynm7T3iOWZVVVhfGPkiRRVRXPceDqkdVqhcKd
-        LMtmsxme4MPbI67rovOtKArDMLDGrUOPbDYb1K5X27Zxt4tuvfF4vN1uKbZer3Gro4aeruufbKZpBkGA
-        HwyapmFWTUOvLMufE3tZFEWYVdPQw6aO6Fs9HA70j0rXcRxjVk1vvd1upyjKYrGg63f07g29txl6/Rp6
-        fRKEL5bYKj6/QL8JAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="iconExport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAIAAABK/LdUAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAVpJREFUWEft1CGLg2Acx/F7MbPYnFHQ5tKapoOtaV8zXTIs7TUM9C0oxsVZlhbE
-        lUXDMAgKQ7Z74H6ODX30kZNxHH6S+jzP/1vk+Zi819gb1p/vSZK02+2m0ynee+rXEwQhiqL7/R6GIc/z
-        +NpHjx4JkAyJ/fB9n+M4rDFj7ZHRQRAgVdlut1hmxtpzXReRV+v1GjvYMPU2mw3G19xut9VqhX0MunuW
-        ZWE2xfV6XSwW2N2lo2eaZlmWGEyXZdl8PseZVm09XdeLosDILkmSyLKMk3TU3mw2S9MUw9icTidRFHGe
-        gtozDOPr1fF4xODKfr/HWkXTNJyn6P5fHjzPQ6fiOA7WmI29h//es22bJJ+RqwdrzHr0BtHQIzfT5++o
-        qopZNQ09lguzHbnbMKumoYdDPeV5Hsfx+Xwmz5fLBbNqBusdDgdFUZbLJXl+R+/Z2HubsTessTekyeQb
-        we8IvdKw12sAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>52</value>
+    <value>41</value>
   </metadata>
 </root>

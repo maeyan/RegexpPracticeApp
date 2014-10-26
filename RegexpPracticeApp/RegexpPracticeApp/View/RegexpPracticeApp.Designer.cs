@@ -30,8 +30,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconHome = new System.Windows.Forms.PictureBox();
             this.iconProblem = new System.Windows.Forms.PictureBox();
-            this.iconImport = new System.Windows.Forms.PictureBox();
-            this.iconExport = new System.Windows.Forms.PictureBox();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.rtbProblem = new System.Windows.Forms.RichTextBox();
             this.rtbResult = new System.Windows.Forms.RichTextBox();
@@ -59,8 +57,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconImport)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconExport)).BeginInit();
             this.pnlModeSelect.SuspendLayout();
             this.pnlProblem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProblemList)).BeginInit();
@@ -73,8 +69,6 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.panel1.Controls.Add(this.iconHome);
             this.panel1.Controls.Add(this.iconProblem);
-            this.panel1.Controls.Add(this.iconImport);
-            this.panel1.Controls.Add(this.iconExport);
             this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -108,34 +102,6 @@
             this.iconProblem.Click += new System.EventHandler(this.iconChange_Click);
             this.iconProblem.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
             this.iconProblem.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconImport
-            // 
-            this.iconImport.Image = ((System.Drawing.Image)(resources.GetObject("iconImport.Image")));
-            this.iconImport.Location = new System.Drawing.Point(12, 112);
-            this.iconImport.Name = "iconImport";
-            this.iconImport.Size = new System.Drawing.Size(37, 37);
-            this.iconImport.TabIndex = 3;
-            this.iconImport.TabStop = false;
-            this.iconImport.Tag = "import";
-            this.toolTip1.SetToolTip(this.iconImport, "問題をImportする");
-            this.iconImport.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconImport.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconImport.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
-            // 
-            // iconExport
-            // 
-            this.iconExport.Image = ((System.Drawing.Image)(resources.GetObject("iconExport.Image")));
-            this.iconExport.Location = new System.Drawing.Point(12, 162);
-            this.iconExport.Name = "iconExport";
-            this.iconExport.Size = new System.Drawing.Size(37, 37);
-            this.iconExport.TabIndex = 2;
-            this.iconExport.TabStop = false;
-            this.iconExport.Tag = "export";
-            this.toolTip1.SetToolTip(this.iconExport, "問題をExportする");
-            this.iconExport.Click += new System.EventHandler(this.iconChange_Click);
-            this.iconExport.MouseEnter += new System.EventHandler(this.iconChange_MouseEnter);
-            this.iconExport.MouseLeave += new System.EventHandler(this.iconChange_MouseLeave);
             // 
             // tbMessage
             // 
@@ -178,6 +144,7 @@
             this.tbRegexp.Size = new System.Drawing.Size(423, 25);
             this.tbRegexp.TabIndex = 6;
             this.tbRegexp.TextChanged += new System.EventHandler(this.tbRegexp_TextChanged);
+            this.tbRegexp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbRegexp_KeyDown);
             // 
             // label2
             // 
@@ -459,8 +426,6 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconProblem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconImport)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iconExport)).EndInit();
             this.pnlModeSelect.ResumeLayout(false);
             this.pnlModeSelect.PerformLayout();
             this.pnlProblem.ResumeLayout(false);
@@ -474,8 +439,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox iconImport;
-        private System.Windows.Forms.PictureBox iconExport;
         private System.Windows.Forms.PictureBox iconHome;
         private System.Windows.Forms.PictureBox iconProblem;
         private System.Windows.Forms.TextBox tbMessage;

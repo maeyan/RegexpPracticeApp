@@ -177,7 +177,10 @@ namespace RegexpPracticeApp {
         }
 
         private void btExecute_Click(object sender, EventArgs e) {
-            
+            RexexpExecute();
+        }
+
+        private void RexexpExecute(){
             if(this.rbSearch.Checked){
                 regexpForm.execMatch();
             
@@ -300,6 +303,12 @@ namespace RegexpPracticeApp {
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
                 return;
+            }
+        }
+
+        private void tbRegexp_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                RexexpExecute();
             }
         }
     }
