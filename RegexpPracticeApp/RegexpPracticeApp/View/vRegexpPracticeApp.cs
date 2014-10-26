@@ -79,14 +79,14 @@ namespace RegexpPracticeApp.View{
         public class Problem {
 
             static public void ShowProblemPanel(Panel pnl, DataGridView dgvProblemList) {
+                          
 
                 //DataBaseからデータを読み込む
                 RegexpDB db = new RegexpDB();
                 db.LoadTitleList(dgvProblemList);
 
                 while (60 < pnl.Left) { //65 or
-                    pnl.Left -= 5;
-                    //System.Threading.Thread.Sleep(1);
+                    pnl.Left -= 10;
                     Application.DoEvents();
                 }
 
@@ -95,8 +95,7 @@ namespace RegexpPracticeApp.View{
             static public void CloseProblemPanel(Panel pnl) {
 
                 while (pnl.Left<650) {
-                    pnl.Left += 5;
-                    //System.Threading.Thread.Sleep(1);
+                    pnl.Left += 10;
                     Application.DoEvents();
                 }
 

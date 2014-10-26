@@ -226,6 +226,7 @@ namespace RegexpPracticeApp {
             vRegexpPracticeApp.Problem.ShowProblemPanel(this.pnlProblem, this.dgvProblemList);
         }
 
+
         private void lnkCloseProblemList_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             vRegexpPracticeApp.Problem.CloseProblemPanel(this.pnlProblem);
         }
